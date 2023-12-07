@@ -1,0 +1,758 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+      "title": "Türkmenstandartlary API Documentation",
+      "description": "",
+      "version": "v1"
+    },
+    "paths": {
+      "/api/state/standards": {
+        "get": {
+          "tags": [
+            "Reader"
+          ],
+          "summary": "Returns all standarts.",
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Standarts"
+                    }
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Unauthorized"
+            },
+            "403": {
+              "description": "Forbidden"
+            }
+          },
+          "security": [
+            { }
+          ]
+        }
+      },
+      "/Session/Token": {
+        "get": {
+          "tags": [
+            "Reader"
+          ],
+          "summary": "Gets Access Token or API key to the current user Account and session",
+          "parameters": [
+            {
+              "name": "authority",
+              "in": "query",
+              "description": "The Authority for the Requested Token",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "label",
+              "in": "query",
+              "description": "Label (Scope) for requested Session Token",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success"
+            },
+            "401": {
+              "description": "Unauthorized"
+            },
+            "403": {
+              "description": "Forbidden"
+            }
+          },
+          "security": [
+            { }
+          ]
+        },
+        "put": {
+          "tags": [
+            "Writer"
+          ],
+          "summary": "Adds an Access Token or API key to the current session.",
+          "requestBody": {
+            "description": "A value pair, specifying the token value [Access Token, API Key] to associate with the current session.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputSessionToken"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputSessionToken"
+                }
+              },
+              "application/*+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputSessionToken"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "Success"
+            },
+            "401": {
+              "description": "Unauthorized"
+            },
+            "403": {
+              "description": "Forbidden"
+            }
+          },
+          "security": [
+            { }
+          ]
+        }
+      },
+      "/UserAccount": {
+        "get": {
+          "tags": [
+            "Reader"
+          ],
+          "summary": "Returns all user accounts associated with the current user",
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/ExposedUserAccount"
+                    }
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Unauthorized"
+            },
+            "403": {
+              "description": "Forbidden"
+            }
+          },
+          "security": [
+            { }
+          ]
+        },
+        "put": {
+          "tags": [
+            "Writer"
+          ],
+          "summary": "Adds a new user account using the given parameters",
+          "parameters": [
+            {
+              "name": "authority",
+              "in": "query",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success"
+            },
+            "401": {
+              "description": "Unauthorized"
+            },
+            "403": {
+              "description": "Forbidden"
+            }
+          },
+          "security": [
+            { }
+          ]
+        }
+      },
+      "/Contexts": {
+        "get": {
+          "tags": [
+            "Reader"
+          ],
+          "summary": "Returns all user accounts associated with the current user",
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Context"
+                    }
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Unauthorized"
+            },
+            "403": {
+              "description": "Forbidden"
+            }
+          },
+          "security": [
+            { }
+          ]
+        }
+      },
+      "/Contexts/Query/{scope}/{term}": {
+        "post": {
+          "tags": [
+            "Reader"
+          ],
+          "summary": "Returns all user accounts associated with the current user",
+          "parameters": [
+            {
+              "name": "scope",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "$ref": "#/components/schemas/QueryScope"
+              }
+            },
+            {
+              "name": "term",
+              "in": "query",
+              "schema": {
+                "type": "string",
+                "default": ""
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Context"
+                    }
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Unauthorized"
+            },
+            "403": {
+              "description": "Forbidden"
+            }
+          },
+          "security": [
+            { }
+          ]
+        }
+      },
+      "/Session/Open": {
+        "put": {
+          "tags": [
+            "Writer"
+          ],
+          "summary": "Starts a new session using the given parameters",
+          "parameters": [
+            {
+              "name": "authority",
+              "in": "query",
+              "description": "The authority wwith which the session should be associated with",
+              "schema": {
+                "type": "string",
+                "default": ""
+              }
+            },
+            {
+              "name": "context",
+              "in": "query",
+              "description": "The context in which the session should be started.",
+              "schema": {
+                "type": "string",
+                "default": ""
+              }
+            },
+            {
+              "name": "save",
+              "in": "query",
+              "description": "Determines whether or not the session service should save the submitted token for reference. If false, a hash will be stored in the token's place to allow for future query.",
+              "schema": {
+                "type": "boolean",
+                "default": true
+              }
+            }
+          ],
+          "requestBody": {
+            "description": "OBSOLETE.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/*+json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Success"
+            },
+            "401": {
+              "description": "Unauthorized"
+            },
+            "403": {
+              "description": "Forbidden"
+            }
+          },
+          "security": [
+            { }
+          ]
+        }
+      },
+      "/Session/Service/Open": {
+        "put": {
+          "tags": [
+            "Writer"
+          ],
+          "summary": "Starts a new session using the given parameters for a service identity user",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/*+json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "Success"
+            }
+          }
+        }
+      },
+      "/Session/Close/{guid}": {
+        "delete": {
+          "tags": [
+            "Writer"
+          ],
+          "summary": "Deletes the specified session",
+          "parameters": [
+            {
+              "name": "guid",
+              "in": "path",
+              "description": "The ID of the session to delete",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success"
+            },
+            "401": {
+              "description": "Unauthorized"
+            },
+            "403": {
+              "description": "Forbidden"
+            }
+          },
+          "security": [
+            { }
+          ]
+        }
+      },
+      "/Session/Context": {
+        "put": {
+          "tags": [
+            "Writer"
+          ],
+          "summary": "Changes the current session context to the context specified.",
+          "parameters": [
+            {
+              "name": "context",
+              "in": "query",
+              "description": "The name or ID of the context to change to",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success"
+            },
+            "401": {
+              "description": "Unauthorized"
+            },
+            "403": {
+              "description": "Forbidden"
+            }
+          },
+          "security": [
+            { }
+          ]
+        }
+      },
+      "/Session/Token/{guid}": {
+        "delete": {
+          "tags": [
+            "Writer"
+          ],
+          "summary": "Deletes the specified token from the current session",
+          "parameters": [
+            {
+              "name": "guid",
+              "in": "path",
+              "description": "The ID of the token to delete",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success"
+            },
+            "401": {
+              "description": "Unauthorized"
+            },
+            "403": {
+              "description": "Forbidden"
+            }
+          },
+          "security": [
+            { }
+          ]
+        }
+      },
+      "/UserAccount/{guid}": {
+        "delete": {
+          "tags": [
+            "Writer"
+          ],
+          "summary": "Deletes the specified user account.",
+          "parameters": [
+            {
+              "name": "guid",
+              "in": "path",
+              "description": "The ID of the user account to delete.",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success"
+            },
+            "401": {
+              "description": "Unauthorized"
+            },
+            "403": {
+              "description": "Forbidden"
+            }
+          },
+          "security": [
+            { }
+          ]
+        }
+      },
+      "/UserAccount/Token": {
+        "put": {
+          "tags": [
+            "Writer"
+          ],
+          "summary": "Adds a token to the current user account",
+          "requestBody": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputUserAccountToken"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputUserAccountToken"
+                }
+              },
+              "application/*+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputUserAccountToken"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "Success"
+            },
+            "401": {
+              "description": "Unauthorized"
+            },
+            "403": {
+              "description": "Forbidden"
+            }
+          },
+          "security": [
+            { }
+          ]
+        }
+      },
+      "/UserAccount/Token/{guid}": {
+        "delete": {
+          "tags": [
+            "Writer"
+          ],
+          "summary": "Deletes specified token from the current user account.",
+          "parameters": [
+            {
+              "name": "guid",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success"
+            },
+            "401": {
+              "description": "Unauthorized"
+            },
+            "403": {
+              "description": "Forbidden"
+            }
+          },
+          "security": [
+            { }
+          ]
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "Token": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "nullable": true
+            },
+            "scope": {
+              "type": "string",
+              "nullable": true
+            },
+            "value": {
+              "type": "string",
+              "nullable": true
+            },
+            "tokenKey": {
+              "type": "string",
+              "nullable": true
+            },
+            "expiresAt": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          "additionalProperties": false
+        },
+        "Standarts": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "number": {
+              "type": "string",
+              "nullable": false
+            },
+            "name_tm": {
+              "type": "string",
+              "nullable": false
+            },
+            "name_en": {
+              "type": "string",
+              "nullable": false
+            },
+            "name_ru": {
+              "type": "string",
+              "nullable": false
+            },
+            "created_at": {
+              "type": "date-time",
+              "nullable": false
+            },
+            "updated_at": {
+              "type": "date-time",
+              "nullable": false
+            },
+            "tokens": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/Token"
+              },
+              "nullable": true
+            }
+          },
+          "additionalProperties": false
+        },
+        "InputSessionToken": {
+          "type": "object",
+          "properties": {
+            "Issuer": {
+              "type": "string",
+              "nullable": true
+            },
+            "Label": {
+              "type": "string",
+              "nullable": true
+            },
+            "Value": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          "additionalProperties": false
+        },
+        "ExposedToken": {
+          "type": "object",
+          "properties": {
+            "Id": {
+              "type": "string",
+              "nullable": true
+            },
+            "Label": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          "additionalProperties": false
+        },
+        "ExposedUserAccount": {
+          "type": "object",
+          "properties": {
+            "Id": {
+              "type": "string",
+              "nullable": true
+            },
+            "Authority": {
+              "type": "string",
+              "nullable": true
+            },
+            "UserAccountTokens": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/ExposedToken"
+              },
+              "nullable": true
+            }
+          },
+          "additionalProperties": false
+        },
+        "Context": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "nullable": true
+            },
+            "id": {
+              "type": "string",
+              "nullable": true
+            },
+            "community": {
+              "type": "boolean"
+            },
+            "subContext": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/Context"
+              },
+              "nullable": true
+            }
+          },
+          "additionalProperties": false
+        },
+        "QueryScope": {
+          "enum": [
+            "Invalid",
+            "Siblings",
+            "Parent",
+            "Ancestors",
+            "Root",
+            "Quick",
+            "Advanced",
+            "Descendants"
+          ],
+          "type": "string"
+        },
+        "InputUserAccountToken": {
+          "type": "object",
+          "properties": {
+            "Authority": {
+              "type": "string",
+              "nullable": true
+            },
+            "Label": {
+              "type": "string",
+              "nullable": true
+            },
+            "Value": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    }
+  }

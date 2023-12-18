@@ -120,7 +120,7 @@ class UserController extends Controller
         if($request->button__type == "upload"){
             $request->validate([
                 'bolum' => 'required',
-                'applications' => 'required|array|min:1|max:10',
+                'applications' => 'required|array|min:1|max:5',
                 'button__type' => 'required',
             ]);
 
@@ -384,7 +384,7 @@ class UserController extends Controller
         if($request->button__type == "upload"){
             $request->validate([
                 'bolum' => 'required',
-                'applications' => 'required|array|min:1|max:10',
+                'applications' => 'required|array|min:1|max:5',
                 'button__type' => 'required',
             ]);
 
@@ -534,7 +534,7 @@ class UserController extends Controller
         if($request->button__type == "upload"){
             $request->validate([
                 'bolum' => 'required',
-                'applications' => 'required|array|min:1|max:10',
+                'applications' => 'required|array|min:1|max:5',
                 'button__type' => 'required',
             ]);
 
@@ -676,7 +676,7 @@ class UserController extends Controller
         if($request->button__type == "upload"){
             $request->validate([
                 'bolum' => 'required',
-                'applications' => 'required|array|min:1|max:10',
+                'applications' => 'required|array|min:1|max:5',
                 'button__type' => 'required',
             ]);
 

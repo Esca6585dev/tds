@@ -80,6 +80,7 @@ Route::group([
     Route::get('/profile', [App\Http\Controllers\HomeController::class, 'index'])->name('profile');
     Route::get('/profile/cart', [App\Http\Controllers\HomeController::class, 'cart'])->name('profile.cart');
     Route::get('/profile/application', [App\Http\Controllers\HomeController::class, 'application'])->name('profile.application');
+    Route::get('/profile/application/create', [App\Http\Controllers\HomeController::class, 'applicationCreate'])->name('profile.application.create');
     Route::get('/profile/letterhead', [App\Http\Controllers\HomeController::class, 'letterhead'])->name('profile.letterhead');
     Route::get('/profile/{code_number}/docx', [App\Http\Controllers\HomeController::class, 'docx'])->name('profile.docx');
     Route::post('/profile/edit', [App\Http\Controllers\HomeController::class, 'profileEdit'])->name('profile.edit');

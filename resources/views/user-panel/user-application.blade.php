@@ -9,7 +9,7 @@
         <h2>{{ __('Applications') }}</h2>
 
         <div>
-          <button class="btn">Add Application</button>
+          <a href="{{ route('profile.application.create', app()->getlocale() ) }}" class="btn">{{ __('Application') }} {{ __('Create') }}</a>
         </div>
       </div>
 

@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Cart;
 use App\Models\Application;
 use App\Models\Category;
+use App\Models\Section;
 use Auth;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -81,6 +82,17 @@ class HomeController extends Controller
         }
 
         return view('user-panel.user-application', compact('applications', 'categories', 'pagination'));
+    }
+
+    public function applicationCreate()
+    {
+        $categories = Category::where('category_id', null)->get();
+
+        $sections = Section::whereNull('section_id')->get();
+
+        $childrenSections = Section::whereNotNull('section_id')->get();
+
+        return view('user-panel.user-application-create', compact('categories', 'sections', 'childrenSections'));
     }
 
     public function letterhead(Request $request, $lang)

@@ -67,7 +67,7 @@
                         </li>
                     </a>
                     <a href="{{ route('profile.application', app()->getlocale() ) }}">
-                        <li class="section__profile__menu__item {{ Request::is('*/profile/application') ? 'active' : '' }}">
+                        <li class="section__profile__menu__item {{ Request::is('*/profile/application*') ? 'active' : '' }}">
                             <span class="section__profile__menu__item__icon">
                                 <svg width="18px" height="18px" viewBox="0 0 62 62" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <title>{{ __('Application') }}</title>

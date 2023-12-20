@@ -13,3 +13,5 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */ 
+
+Route::get('/state/standards', [App\Http\Controllers\ApiControllers\Standart\ApiStandartController::class, 'index'])->middleware('auth.basic')->name('api.state.standards');

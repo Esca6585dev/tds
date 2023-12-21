@@ -21,7 +21,6 @@ class SetLocale
         } else {
             app()->setLocale(config('app.fallback_locale'));
         }
-        
         return $next($request);
     }
 }

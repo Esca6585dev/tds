@@ -123,13 +123,13 @@
                     <div class="form__profile__phone__number">
                       <select name="bolum" class="upload__btn">
                           @foreach ($sections as $section)
-                          <option value="{{ $section->id }}" {{ ($sectionId == $section->id) ? 'selected=selected' : '' }}>{{ $section->{ 'name_' . app()->getlocale() } }}</option>
+                          <option value="{{ $section->id }}">{{ $section->{ 'name_' . app()->getlocale() } }}</option>
                           @endforeach
                       </select>
                       
                       <select name="bolum" class="upload__btn">
                           @foreach ($childrenSections as $childrenSection)
-                          <option value="{{ $childrenSection->id }}" {{ ($childrenSectionId == $childrenSection->id) ? 'selected=selected' : '' }} >{{ $childrenSection->{ 'name_' . app()->getlocale() } }}</option>
+                          <option value="{{ $childrenSection->id }}">{{ $childrenSection->{ 'name_' . app()->getlocale() } }}</option>
                           @endforeach
                       </select>
                     </div>

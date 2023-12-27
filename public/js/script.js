@@ -164,7 +164,6 @@ function addToCartApplication(id, AuthCheck){
             type: 'POST',
             data: token,
             success: function (data) {
-                console.log(data);
                 if(data == 'tds was added to cart'){
                     count++;
                     $("#session__count").html(count);
@@ -173,7 +172,6 @@ function addToCartApplication(id, AuthCheck){
                     $('#active__' + id).removeClass("fa-plus");
                     $('#active__' + id).addClass("fa-close");
                     $('#active__' + id).addClass("color-gold");
-                    console.log($('active__' + id));
                     alertFade();
                 } else if(data = 'tds was removed to cart') {
                     count--;
@@ -187,7 +185,6 @@ function addToCartApplication(id, AuthCheck){
                 }
             },
             error: function(err) {
-                console.log(err);
             }
         });
     }
@@ -203,16 +200,13 @@ function removeFromCartApplication(id){
         type: 'POST',
         data: token,
         success: function (data) {
-            console.log(data);
             if(data = 'tds was removed to cart') {
                 $(tds__id).remove();
                 $('.danger').css('display','block');
                 alertFade();
-                console.log(tds__id);
             }
         },
         error: function(err) {
-            console.log(err);
         }
     });
 }
@@ -298,11 +292,9 @@ function saveData(){
         type: 'POST',
         data: formData,
         success: function(success) {
-            console.log(success);
             window.location.reload();
         },
         error: function(error) {
-            console.error(error);
         }
     });
 
@@ -452,7 +444,6 @@ function changeDescription(event) {
             $(description).empty();
             $(description).removeClass("color__red");
 
-            console.log(description);
             
             if(lang == 'tm'){
                 $(description).append(obj.sections[0]);
@@ -460,6 +451,44 @@ function changeDescription(event) {
                 $(description).append(obj.sections[1]);
             } else if(lang == 'ru'){
                 $(description).append(obj.sections[2]);
+            }
+        }
+    });
+}
+
+function redirectToRoute(event) {
+    var htmlElement = document.getElementsByTagName("html")[0];
+    var lang = htmlElement.getAttribute("lang");
+
+    var id = event.target.value;
+    var api = '/api/sections/url';
+    var username = 'user@gmail.com';
+    var password = 'password';
+
+    $.ajax({  
+        url: window.location.origin + api,
+        username : username,
+        password : password,
+        data: { id: id },
+        type: 'POST',
+        contentType: 'application/x-www-form-urlencoded',
+        dataType: "text",
+        xhrFields: 
+        {
+            withCredentials: true
+        },
+        beforeSend: function (xhr) { 
+            xhr.setRequestHeader('Authorization', 'Basic ' + btoa(username + ":" + password));             
+        },
+        success: function (data) {
+            const obj = JSON.parse(data);
+
+            if(lang == 'tm'){
+                window.location.replace(window.location.origin + '/' + lang + '/application/' + id + '/' + obj.name_tm);
+            } else if(lang == 'en'){
+                window.location.replace(window.location.origin + '/' + lang + '/application/' + id + '/' + obj.name_en);
+            } else if(lang == 'ru'){
+                window.location.replace(window.location.origin + '/' + lang + '/application/' + id + '/' + obj.name_ru);
             }
         }
     });

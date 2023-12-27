@@ -29,9 +29,9 @@ class FormSectionStandards extends Component
     {
         $sections = Section::whereNull('section_id')->get();
 
-        $childrenSections = Section::whereNotNull('section_id')->get();
-
         $sectionId = Section::find($this->childrenSectionId)->parent->id;
+
+        $childrenSections = Section::where('section_id', $sectionId)->get();
 
         $current_section = Section::find($this->childrenSectionId);
 

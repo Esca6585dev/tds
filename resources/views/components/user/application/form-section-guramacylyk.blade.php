@@ -101,7 +101,7 @@
             @foreach ($childrenSections as $childrenSection)
             <option value="{{ $childrenSection->id }}" {{ ($childrenSectionId == $childrenSection->id) ? 'selected=selected' : '' }} >{{ $childrenSection->{ 'name_' . app()->getlocale() } }}</option>
             @endforeach
-            </select>
+          </select>
         </div>
 
         <hr class="hr__blue__bold">

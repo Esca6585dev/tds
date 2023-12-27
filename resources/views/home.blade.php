@@ -15,6 +15,8 @@
   <body>
 
     <x-user.alert.all/>
+    
+    <x-user.snowing />
 
     <x-user.header />
 

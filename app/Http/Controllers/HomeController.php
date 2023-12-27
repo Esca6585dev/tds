@@ -89,8 +89,9 @@ class HomeController extends Controller
         $categories = Category::where('category_id', null)->get();
 
         $sections = Section::whereNull('section_id')->get();
+        $firstSection = Section::whereNull('section_id')->first();
 
-        $childrenSections = Section::whereNotNull('section_id')->get();
+        $childrenSections = Section::where('section_id', $firstSection->id)->get();
 
         return view('user-panel.user-application-create', compact('categories', 'sections', 'childrenSections'));
     }

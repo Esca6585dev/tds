@@ -14,4 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */ 
 
-Route::get('/state/standards', [App\Http\Controllers\ApiControllers\Standart\ApiStandartController::class, 'index'])->middleware('auth.basic')->name('api.state.standards');
+Route::get('/state/standards', [App\Http\Controllers\ApiControllers\Standart\ApiStandartController::class, 'index'])->middleware('auth.basic');
+
+Route::post('/sections', [App\Http\Controllers\ApiControllers\Section\ApiSectionController::class, 'sections'])->middleware('auth.basic');
+
+Route::post('/sections/description', [App\Http\Controllers\ApiControllers\Section\ApiSectionController::class, 'sectionsDescription'])->middleware('auth.basic');

@@ -376,19 +376,91 @@ function topFunction() {
 }
 
 function changeBolum(event) {
-    var headTextArea = document.getElementById("headTextArea");
-    var text1 = ['"Türkmenstandartlary" baş döwlet gullugy', 'Standartlaşdyryş we Sertifikatlaşdyryş bölümi', 'Metrologiýa bölümi', 'Zähmeti we ýerasty baýlyklary goramak bölümi', 'Kiberhowpsuzlyk boýunça sertifikatlaşdyryş bölümi'];
-    var text2 = ['Türkmen standart maglumat merkezi', 'Akkreditasiýa bölümi', 'Guramaçylyk bölümi', 'Standartlaryň döwlet gaznasy bölümi'];
+    var htmlElement = document.getElementsByTagName("html")[0];
 
-    text1.forEach(element => {
-        if(element == event.target.value){
-            headTextArea.value = "«Türkmenstandartlary» baş döwlet gullugyna";
+    var lang = htmlElement.getAttribute("lang");
+
+    var parent_id = event.target.value;
+    var api = '/api/sections';
+    var username = 'user@gmail.com';
+    var password = 'password';
+
+    $.ajax({  
+        url: window.location.origin + api,
+        username : username,
+        password : password,
+        data: { parent_id: parent_id },
+        type: 'POST',
+        contentType: 'application/x-www-form-urlencoded',
+        dataType: "text",
+        xhrFields: 
+        {
+            withCredentials: true
+        },
+        beforeSend: function (xhr) { 
+            xhr.setRequestHeader('Authorization', 'Basic ' + btoa(username + ":" + password));             
+        },
+        success: function (data) {
+            const obj = JSON.parse(data);
+
+            var bolum = $('#bolum');
+            $(bolum).empty();
+            
+            for (var i = 0; i < obj.sections.length; i++) {
+                if(lang == 'tm'){
+                    $(bolum).append('<option id=' + obj.sections[i].id + ' value=' + obj.sections[i].id + '>' + obj.sections[i].name_tm + '</option>');
+                } else if(lang == 'en'){
+                    $(bolum).append('<option id=' + obj.sections[i].id + ' value=' + obj.sections[i].id + '>' + obj.sections[i].name_en + '</option>');
+                } else if(lang == 'ru'){
+                    $(bolum).append('<option id=' + obj.sections[i].id + ' value=' + obj.sections[i].id + '>' + obj.sections[i].name_ru + '</option>');
+                }
+            }
         }
     });
+}
 
-    text2.forEach(element => {
-        if(element == event.target.value){
-            headTextArea.value = "Türkmen standartlar maglumat merkezine";
+function changeDescription(event) {
+    var htmlElement = document.getElementsByTagName("html")[0];
+
+    var lang = htmlElement.getAttribute("lang");
+
+    var id = event.target.value;
+    var api = '/api/sections/description';
+    var username = 'user@gmail.com';
+    var password = 'password';
+
+    $.ajax({  
+        url: window.location.origin + api,
+        username : username,
+        password : password,
+        data: { id: id },
+        type: 'POST',
+        contentType: 'application/x-www-form-urlencoded',
+        dataType: "text",
+        xhrFields: 
+        {
+            withCredentials: true
+        },
+        beforeSend: function (xhr) { 
+            xhr.setRequestHeader('Authorization', 'Basic ' + btoa(username + ":" + password));             
+        },
+        success: function (data) {
+            const obj = JSON.parse(data);
+
+            var description = $('#section_description');
+
+            $(description).empty();
+            $(description).removeClass("color__red");
+
+            console.log(description);
+            
+            if(lang == 'tm'){
+                $(description).append(obj.sections[0]);
+            } else if(lang == 'en'){
+                $(description).append(obj.sections[1]);
+            } else if(lang == 'ru'){
+                $(description).append(obj.sections[2]);
+            }
         }
     });
 }

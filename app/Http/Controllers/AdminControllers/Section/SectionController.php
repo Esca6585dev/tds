@@ -102,7 +102,7 @@ class SectionController extends Controller
         
         $section->route = $request->route;
 
-        $section->image = $originalImage;
+        $section->image = $originalImage ?? null;
 
         $section->section_id = $request->section_id;
         

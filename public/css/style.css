@@ -38,6 +38,10 @@ input[type=file]::file-selector-button {
   border-radius: 5px;
 }
 
+ul li {
+  list-style: none;
+}
+
 
 /*################### Modal Begin ###################*/
 
@@ -427,17 +431,35 @@ input[type=file]::file-selector-button {
   border-radius: 5px;
 }
 
+.section__application__form {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 550px 550px;
+  gap: 10px;
+}
+
+.section__container__application__wrapper {
+  background-color: rgb(218, 165, 32, .1);
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.section_application_description {
+  background-color: #fff;
+  padding: 5px;
+}
+
 .section__grid__container {
   display: grid;
   justify-content: center;
-  grid-template-columns: 500px 500px; /*Make the grid smaller than the container*/
+  grid-template-columns: 500px 500px;
   gap: 10px;
 }
 
 .section__grid__container__text {
   display: grid;
   justify-content: center;
-  grid-template-columns: 1100px; /*Make the grid smaller than the container*/
+  grid-template-columns: 1100px;
 }
 
 .section__grid__card__text {
@@ -2037,12 +2059,12 @@ tr:nth-child(even) {
     width: 385px;
   }
 
-  .section__grid__container {
-    grid-template-columns: 400px 400px; /*Make the grid smaller than the container*/
+  .section__grid__container, .section__application__form {
+    grid-template-columns: 400px 400px;
   }
 
   .section__grid__container__text {
-    grid-template-columns: 800px; /*Make the grid smaller than the container*/
+    grid-template-columns: 800px;
   }
 
   .toast {
@@ -2196,12 +2218,12 @@ tr:nth-child(even) {
     display: block;
   }
 
-  .section__grid__container {
-    grid-template-columns: 350px 350px; /*Make the grid smaller than the container*/
+  .section__grid__container, .section__application__form {
+    grid-template-columns: 350px 350px;
   }
 
   .section__grid__container__text {
-    grid-template-columns: 700px; /*Make the grid smaller than the container*/
+    grid-template-columns: 700px;
   }
 
   .font-size-1200 {
@@ -2287,12 +2309,12 @@ tr:nth-child(even) {
     display: none;
   }
 
-  .section__grid__container {
-    grid-template-columns: 330px 330px; /*Make the grid smaller than the container*/
+  .section__grid__container, .section__application__form {
+    grid-template-columns: 330px 330px;
   }
 
   .section__grid__container__text {
-    grid-template-columns: 660px; /*Make the grid smaller than the container*/
+    grid-template-columns: 660px;
   }
 
   .card-image {
@@ -2391,12 +2413,12 @@ tr:nth-child(even) {
     width: 600px;
   }
 
-  .section__grid__container {
-    grid-template-columns: 280px 280px; /*Make the grid smaller than the container*/
+  .section__grid__container, .section__application__form {
+    grid-template-columns: 280px 280px;
   }
 
   .section__grid__container__text {
-    grid-template-columns: 560px; /*Make the grid smaller than the container*/
+    grid-template-columns: 560px;
   }
 
   .textarea {
@@ -2583,8 +2605,8 @@ tr:nth-child(even) {
     width: 78%;
   }
 
-  .section__grid__container, .section__grid__container__text {
-    grid-template-columns: 400px; /*Make the grid smaller than the container*/
+  .section__grid__container, .section__grid__container__text, .section__application__form {
+    grid-template-columns: 400px;
   }
 
   .section__grid__card a {
@@ -2859,8 +2881,8 @@ tr:nth-child(even) {
     width: 132px;
   }
 
-  .section__grid__container, .section__grid__container__text {
-    grid-template-columns: 250px; /*Make the grid smaller than the container*/
+  .section__grid__container, .section__grid__container__text, .section__application__form {
+    grid-template-columns: 250px;
     gap: 0;
     padding: 0;
   }

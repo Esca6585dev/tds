@@ -97,7 +97,7 @@
             <option value="{{ $section->id }}" {{ ($sectionId == $section->id) ? 'selected=selected' : '' }}>{{ $section->{ 'name_' . app()->getlocale() } }}</option>
             @endforeach
           </select>
-          <select name="bolum" class="upload__btn" onchange="changeBolum(event)">
+          <select name="bolum" class="upload__btn" onchange="redirectToRoute(event)" id="bolum">
             @foreach ($childrenSections as $childrenSection)
             <option value="{{ $childrenSection->id }}" {{ ($childrenSectionId == $childrenSection->id) ? 'selected=selected' : '' }} >{{ $childrenSection->{ 'name_' . app()->getlocale() } }}</option>
             @endforeach

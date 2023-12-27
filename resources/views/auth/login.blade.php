@@ -13,6 +13,8 @@
     <title>{{ __('Login') }} | {{ __('Main State Service «Turkmenstandartary»') }}</title>
 </head>
 <body>
+    <x-user.snowing />
+    
     <div class="container">
         <div class="forms">
             <div class="form login">

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app()->getlocale() }}">
   <head>
 
     <x-user.head />
@@ -8,6 +8,8 @@
 
   </head>
   <body>
+
+    <x-user.snowing />
 
     <x-user.header />
     

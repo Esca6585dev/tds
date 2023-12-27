@@ -161,6 +161,9 @@ class UserController extends Controller
                     $application->file = $originalApplication;
 
                     $application->save();
+
+                    event(new ApplicationRegistered($application));
+
                 }
             }
 
@@ -423,6 +426,8 @@ class UserController extends Controller
                     $application->file = $originalApplication;
 
                     $application->save();
+
+                    event(new ApplicationRegistered($application));
                 }
             }
 
@@ -522,6 +527,8 @@ class UserController extends Controller
 
         $application->save();
 
+        event(new ApplicationRegistered($application));
+
         if($request->button__type == 'download'){
             return \Response::download($standart_name);
         } else {
@@ -573,6 +580,8 @@ class UserController extends Controller
                     $application->file = $originalApplication;
 
                     $application->save();
+
+                    event(new ApplicationRegistered($application));
                 }
             }
 
@@ -664,6 +673,8 @@ class UserController extends Controller
 
         $application->save();
 
+        event(new ApplicationRegistered($application));
+
         if($request->button__type == 'download'){
             return \Response::download($standart_name);
         } else {
@@ -716,6 +727,8 @@ class UserController extends Controller
                     $application->file = $originalApplication;
 
                     $application->save();
+
+                    event(new ApplicationRegistered($application));
                 }
             }
 
@@ -804,18 +817,13 @@ class UserController extends Controller
 
         $application->save();
 
+        event(new ApplicationRegistered($application));
+
         if($request->button__type == 'download'){
             return \Response::download($standart_name);
         } else {
             return redirect()->route('profile.application', app()->getlocale() )->with('success-order', 'Your application sent successfully!');
         }
-    }
-
-    public function fillApplicationFormSection(Request $request, $lang, $pagination = 5)
-    {
-        $sections = Section::whereNull('section_id')->get();
-
-        return view('user-panel.fill-application', compact('sections'));
     }
 
     public function rss()

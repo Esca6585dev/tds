@@ -284,7 +284,7 @@ ul li {
 }
 
 .symbol img {
-  width: 75px;
+  width: 100px;
 }
 
 .header__wrapper__center ul {
@@ -2378,7 +2378,7 @@ tr:nth-child(even) {
   }
 
   .symbol {
-    margin-right: 15px;
+    margin-right: 100px;
   }
 
   .footer__menu__header,

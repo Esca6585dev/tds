@@ -28,7 +28,7 @@
   
           <div class="section__container__tab__bottom">
             <div class="section__container__tab__title">
-              {{ $row->{ 'name_' . app()->getlocale() } }}
+              {{ Str::limit($row->{ 'name_' . app()->getlocale() }, 100) }}
             </div>
             <div class="section__container__tab__link">
               <a href="{{ route('works.id', [app()->getlocale(), $row->id, Str::slug($row->{ 'name_' . app()->getlocale() }) ]) }}">

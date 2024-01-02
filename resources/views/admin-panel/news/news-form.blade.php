@@ -481,7 +481,6 @@
     <script src="{{ asset('metronic-template/v7/assets/js/scripts.bundle.js') }}"></script>
 
     <script src="{{ asset('metronic-template/v7/assets/js/pages/crud/forms/editors/summernote.min.js') }}"></script>
-
 </body>
 <!--end::Body-->
 @endsection

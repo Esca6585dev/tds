@@ -30,6 +30,7 @@ class NewsEditRequest extends FormRequest
             'text_tm' => 'required',
             'text_en' => 'required',
             'text_ru' => 'required',
+            'view' => 'nullable',
             'image' => 'nullable',
             'category_id' => 'required',
         ];

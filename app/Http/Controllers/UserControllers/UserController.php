@@ -882,13 +882,14 @@ class UserController extends Controller
 
     public function worksID($lang, $id, $slug)
     {
-        $categories = Category::where('category_id', null)->get();
-
         $work = News::findOrFail($id);
+        
+        $work->view++;
+        $work->update();
 
         $works = News::where('category_id', 2)->where('id', '!=', $id)->inRandomOrder()->limit(3)->get();
 
-        return view('user-panel.works-id', compact('categories', 'work', 'works'));
+        return view('user-panel.works-id', compact('work', 'works'));
     }
 
     public function websites()

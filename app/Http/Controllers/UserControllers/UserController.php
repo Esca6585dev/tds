@@ -27,7 +27,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        return view('user-panel.index');
+    return view('user-panel.index');
     }
 
     public function category($lang, $id)

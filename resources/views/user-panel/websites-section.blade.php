@@ -32,7 +32,7 @@
                 </div>
                 <div class="section__container__web__site__link">
                   <a href="{!! $webSite->{ 'text_' . app()->getlocale() } !!}" target="_blank">
-                    {{ $webSite->{ 'text_' . app()->getlocale() } }}
+                    {!! $webSite->{ 'text_' . app()->getlocale() } !!}
                   </a>
                 </div>
               </div>

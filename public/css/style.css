@@ -2377,10 +2377,6 @@ tr:nth-child(even) {
     width: 390px;
   }
 
-  .symbol {
-    margin-right: 100px;
-  }
-
   .footer__menu__header,
   .footer__menu__title ul {
     margin-top: 10px;
@@ -2705,6 +2701,10 @@ tr:nth-child(even) {
   .footer__container .footer__wrapper, .slide-container,
   .hr, .section__profile, ul.section__breadcrumb {
     width: 350px;
+  }
+
+  .symbol {
+    margin-right: 10px;
   }
 
   .header__container .header__wrapper {

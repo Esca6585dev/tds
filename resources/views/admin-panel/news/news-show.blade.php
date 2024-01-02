@@ -1,7 +1,7 @@
 @extends('layouts.admin-template-app')
 
 @section('title')
-{{ __('Text') }} {{ __('View') }}
+{{ __('News') }} {{ __('View') }}
 @endsection
 
 @section('style')
@@ -168,9 +168,9 @@
                                     <div class="row mb-17">
                                         <div class="col-xxl-7 pl-xxl-11 mb-17">
                                             <h5>
-                                                <a href="{{ route(Request::segment(3) . '.show', [ app()->getlocale(), $text->parent ? $text->parent->id : $text->id ] ) }}"
-                                                    class="{{ $text->parent ? 'text-warning' : 'text-primary' }}">
-                                                    {{ $text->parent ? $text->parent->{ 'name_' . app()->getlocale() } : __('Parent text') }}
+                                                <a href="{{ route(Request::segment(3) . '.show', [ app()->getlocale(), $news->parent ? $news->parent->id : $news->id ] ) }}"
+                                                    class="{{ $news->parent ? 'text-warning' : 'text-primary' }}">
+                                                    {{ $news->parent ? $news->parent->{ 'name_' . app()->getlocale() } : __('Parent text') }}
                                                 </a>
                                             </h5>
                                         </div>
@@ -180,7 +180,7 @@
                                             <div class="form-group">
                                                 <label>{{ __('Name') }} ({{ $language['name'] }})</label>
                                                 
-                                                <textarea class="summernote @error('name_' . $lang ) is-invalid @enderror" id="kt_summernote_1" name="name_{{ $lang }}" placeholder="{{ __('Name') }} ({{ $language['name'] }})...">{{ $text->{ 'name_' . $lang } ?? '' }}{{ request()->segment(count(request()->segments())) == 'create' ? old('name_' . $lang) : '' }}</textarea>
+                                                <textarea class="summernote @error('name_' . $lang ) is-invalid @enderror" id="kt_summernote_1" name="name_{{ $lang }}" placeholder="{{ __('Name') }} ({{ $language['name'] }})...">{{ $news->{ 'name_' . $lang } ?? '' }}{{ request()->segment(count(request()->segments())) == 'create' ? old('name_' . $lang) : '' }}</textarea>
                                                 
                                                 @error('name_' . $lang )
                                                 <div class="fv-plugins-message-container invalid-feedback">
@@ -213,7 +213,7 @@
                                         </span>
                                     </a>
 
-                                    <a href="{{ route(Request::segment(3) . '.edit', [ app()->getlocale(), $text->id ] ) }}"
+                                    <a href="{{ route(Request::segment(3) . '.edit', [ app()->getlocale(), $news->id ] ) }}"
                                         title="{{ __('Edit') }}" class="btn btn-warning font-weight-bolder">
                                         <span class="svg-icon svg-icon-md">
                                             <span class="svg-icon svg-icon-md svg-icon-dark">

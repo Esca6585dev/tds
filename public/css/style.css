@@ -1308,6 +1308,7 @@ a.button {
 .section__container__tab__image img {
   padding-top: 10px;
   height: 100%;
+  max-width: 250px;
   display: block;
   margin: auto;
 }

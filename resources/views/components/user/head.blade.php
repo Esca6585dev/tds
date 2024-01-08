@@ -10,3 +10,4 @@
 <link rel="stylesheet" href="{{ asset('css/swiper-bundle.min.css') }}" />
 <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}" />
 <link rel="shortcut icon" href="{{ asset('img/tds-logo/tds-icon.gif') }}" />
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4012886709218127" crossorigin="anonymous"></script>

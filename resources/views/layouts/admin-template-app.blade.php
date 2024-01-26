@@ -22,8 +22,6 @@
 </head>
 <!--end::Head-->
 
-<x-user.snowing />
-
 <!--begin::Body-->
 @yield('body')
 <!--end::Body-->

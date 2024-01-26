@@ -9,8 +9,6 @@
   </head>
   <body>
 
-    <x-user.snowing />
-
     <x-user.header />
     
     <x-user.alert.all/>

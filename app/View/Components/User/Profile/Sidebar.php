@@ -1,10 +1,10 @@
 <?php
 
-namespace App\View\Components\user\profile;
+namespace App\View\Components\User\Profile;
 
 use Illuminate\View\Component;
 
-class sidebar extends Component
+class Sidebar extends Component
 {
     /**
      * Create a new component instance.

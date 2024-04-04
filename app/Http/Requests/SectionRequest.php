@@ -27,10 +27,11 @@ class SectionRequest extends FormRequest
             'name_tm' => 'required',
             'name_en' => 'required',
             'name_ru' => 'required',
+            'name_tr' => 'required',
             'desc_tm' => 'nullable',
             'desc_en' => 'nullable',
             'desc_ru' => 'nullable',
-            'route' => 'nullable',
+            'desc_tr' => 'nullable',
             'image' => 'nullable',
             'section_id' => 'nullable',
         ];

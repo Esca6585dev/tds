@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Application;
 use App\Http\Requests\ApplicationRequest;
+use Stevebauman\Location\Facades\Location;
 use Auth;
 
 class ApplicationController extends Controller
@@ -30,18 +31,18 @@ class ApplicationController extends Controller
         if(request()->ajax()){
             if($request->search) {
                 $searchQuery = trim($request->query('search'));
-                
-                $requestData = ['first_name', 'last_name', 'email', 'phone_number', 'address', 'ip_address'];
-    
-                $applications = Application::with(['standart', 'user'], function($q) use($requestData, $searchQuery) {
+
+                $requestData = Application::fillableData();
+
+                $applications = Application::where(function($q) use($requestData, $searchQuery) {
                                         foreach ($requestData as $field)
                                         $q->orWhere($field, 'like', "%{$searchQuery}%");
-                                })->paginate($pagination);
+                                })->withTrashed()->paginate($pagination);
             }
             
             return view('admin-panel.application.application-table', compact('applications', 'pagination'))->render();
         }
-
+        
         return view('admin-panel.application.application', compact('applications', 'pagination'));
     }
 
@@ -76,7 +77,9 @@ class ApplicationController extends Controller
     {
         $application = Application::withTrashed()->find($id);
 
-        return view('admin-panel.application.application-show', compact('application'));
+        $location = Location::get($application->ip_address);
+
+        return view('admin-panel.application.application-show', compact('application', 'location'));
     }
 
     /**
@@ -110,7 +113,7 @@ class ApplicationController extends Controller
      */
     public function destroy($lang, $id, Request $request)
     {
-        if(Auth::user()->roles[0]['name'] == 'super-admin'){
+        if(Auth::user()->username == 'admintds'){
             
             if($request->method == 'delete'){
                 
@@ -145,7 +148,6 @@ class ApplicationController extends Controller
                 return redirect()->route('application.index', [ app()->getlocale() ])->with('success-restore', 'The resource was restored!');
             }
         }
-
     }
 
     public function deleteFolder($application)

@@ -28,6 +28,7 @@ class StandartCreateRequest extends FormRequest
             'name_tm' => 'required',
             'name_en' => 'required',
             'name_ru' => 'required',
+            'name_tr' => 'required',
         ];
     }
 }

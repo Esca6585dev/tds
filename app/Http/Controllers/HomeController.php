@@ -8,10 +8,13 @@ use App\Models\Cart;
 use App\Models\Application;
 use App\Models\Category;
 use App\Models\Section;
-use Auth;
+use App\Models\Letterhead;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\DB;
+use Auth;
+use Str;
+use Hash;
 
 class HomeController extends Controller
 {
@@ -22,16 +25,46 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth', 'verified']);
+        $this->middleware(['auth', 'verified', 'require_phone_number']);
     }
     /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function profile()
     {
         return view('user-panel.user-profile');
+    }
+
+    public function passwordChange()
+    {
+        return view('user-panel.user-profile-password-change');
+    }
+
+    public function passwordChangeEdit(Request $request)
+    {
+        $request->validate([
+            'current_password' => ['required','string','min:8'],
+            'password' => ['required', 'string', 'min:8', 'confirmed']
+        ]);
+
+        $currentPasswordStatus = Hash::check($request->current_password, auth()->user()->password);
+
+        if($currentPasswordStatus){
+
+            $id = Auth::user()->id;
+
+            Auth::logout();
+
+            User::findOrFail($id)->update([
+                'password' => Hash::make($request->password),
+            ]);
+            
+            return redirect()->route('main-page', app()->getlocale() )->with('success-create','Your password has been changed!');
+        } else {
+            return redirect()->back()->with('warning','Current Password does not match with Old Password');
+        }
     }
 
     public function cart(Request $request, $lang, $pagination = 5)
@@ -44,7 +77,7 @@ class HomeController extends Controller
             if($request->search) {
                 $searchQuery = trim($request->query('search'));
 
-                $requestData = ['number', 'name_tm', 'name_en', 'name_ru'];
+                $requestData = ['number', 'name_tm', 'name_en', 'name_ru', 'name_tr'];
 
                 $carts = Cart::with(['standart', 'user'], function($q) use($requestData, $searchQuery) {
                                         foreach ($requestData as $field)
@@ -71,7 +104,7 @@ class HomeController extends Controller
             if($request->search) {
                 $searchQuery = trim($request->query('search'));
 
-                $requestData = ['number', 'name_tm', 'name_en', 'name_ru'];
+                $requestData = ['number', 'name_tm', 'name_en', 'name_ru', 'name_tr'];
 
                 $applications = Cart::with(['standart', 'user'], function($q) use($requestData, $searchQuery) {
                                         foreach ($requestData as $field)
@@ -96,9 +129,90 @@ class HomeController extends Controller
         return view('user-panel.user-application-create', compact('categories', 'sections', 'childrenSections'));
     }
 
+    public function applicationCreateSection($lang, $childrenSectionId, $slug)
+    {
+        $categories = Category::where('category_id', null)->get();
+
+        $sections = Section::whereNull('section_id')->get();
+        $firstSection = Section::whereNull('section_id')->first();
+
+        $sectionId = Section::find($childrenSectionId)->parent->id;
+
+        $childrenSections = Section::where('section_id', $sectionId)->get();
+
+        $currentSection = Section::find($childrenSectionId);
+
+        return view('user-panel.user-application-create-section', compact('categories', 'sections', 'sectionId', 'childrenSectionId', 'childrenSections', 'currentSection'));
+    }
+
     public function letterhead(Request $request, $lang)
     {
         return view('user-panel.user-letterhead');
+    }
+
+    public function letterheadEdit(Request $request, $lang)
+    {
+        $this->addLetterHead($request, Auth::user());
+
+        return redirect()->route('profile.letterhead', [ app()->getlocale() ])->with('success-update', 'The resource was updated!');
+    }
+
+    public function addLetterHead($request, $user)
+    {
+        $originalLetterhead = env('APP_URL') . '/img/Emblem_of_Turkmenistan.png';
+        if($user->letterhead != null){
+            $originalLetterhead = $user->letterhead->image;
+        }
+
+        if($request->file('image')){
+            $this->deleteFolder($user);
+
+            $letterheadLogo = $request->file('image');
+
+            $date = date("d-m-Y_H-i-s");
+
+            $code_number = Str::random(10);
+
+            $user_name = $user->first_name . "_" . $user->last_name . "_" . $user->id;
+
+            $fileRandName = 'logo_' . $code_number;
+
+            $fileExt = $letterheadLogo->getClientOriginalExtension();
+
+            $fileName = $fileRandName . '.' . $fileExt;
+
+            $path = "assets/user/" . $user_name . '/';
+
+            $letterheadLogo->move($path, $fileName);
+
+            $originalLetterhead = $path . $fileName;
+        }
+
+        Letterhead::findOrCreate($user->id, [
+            'user_id' => $user->id,
+            'company_name_tm' => $request->company_name_tm, 
+            'company_name_en' => $request->company_name_en, 
+            'address_tm' => $request->address_tm,
+            'address_en' => $request->address_en,
+            'phone_number_tm' => $request->phone_number_tm,
+            'phone_number_en' => $request->phone_number_en,
+            'email_tm' => $request->email_tm,
+            'email_en' => $request->email_en,
+            'image' => $originalLetterhead,
+        ]);
+    }
+    
+    public function deleteFolder($user)
+    {
+        if($user->letterhead){
+            if($user->letterhead->image){
+                $folder = explode('/', $user->letterhead->image);
+    
+                if($folder[2] != 'user-seeder'){
+                    \File::deleteDirectory($folder[0] . '/' . $folder[1] . '/' . $folder[2]);
+                }
+            }
+        }
     }
 
     public function docx($lang, $code_number)

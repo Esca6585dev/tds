@@ -12,11 +12,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::redirect('/', config('app.locale'));
+Route::get('info', fn () => phpinfo());
 
-Route::get('/distance', function(){
-    return view('distance');
-});
+Route::get('/export',[App\Http\Controllers\UserControllers\UserController::class, 'export'])->name('export');
+
+Route::get('/',[App\Http\Controllers\UserControllers\UserController::class, 'goToMainPage'])->name('goToMainPage');
 
 Route::get('/login', function(){
     return redirect()->route('login', app()->getlocale());
@@ -32,15 +32,14 @@ Route::group([
 ], function () {
 
     Route::get('/e-sign', [App\Http\Controllers\UserControllers\UserController::class, 'eSign'])->name('e-sign')->middleware(['auth','verified','require_phone_number']);
-    Route::get('/country', [App\Http\Controllers\UserControllers\UserController::class, 'country'])->name('country')->middleware(['auth','verified','require_phone_number']);
 
-    Route::get('/', [App\Http\Controllers\UserControllers\UserController::class, 'index'])->name('main-page');
+    Route::get('/', [App\Http\Controllers\UserControllers\UserController::class, 'mainPage'])->name('main-page');
 
     Route::get('/rss', [App\Http\Controllers\UserControllers\UserController::class, 'rss'])->name('rss');
 
     Route::get('/contact-us', [App\Http\Controllers\UserControllers\UserController::class, 'contactUs'])->name('contact-us');
 
-    Route::post('/send/message', [App\Http\Controllers\UserControllers\UserController::class, 'sendMessage'])->name('send-message');
+    Route::post('/send/message', [App\Http\Controllers\UserControllers\UserController::class, 'sendMessage'])->name('send-message')->middleware(['auth','verified','require_phone_number']);
 
     Route::get('/news', [App\Http\Controllers\UserControllers\UserController::class, 'news'])->name('news');
 
@@ -57,6 +56,8 @@ Route::group([
     Route::get('/state/standards', [App\Http\Controllers\UserControllers\UserController::class, 'stateStandards'])->name('state.standards');
 
     Route::get('/digital/services', [App\Http\Controllers\UserControllers\UserController::class, 'digitalServices'])->name('digital.services');
+    
+    Route::get('/digital/services/{id}-{slug}', [App\Http\Controllers\UserControllers\UserController::class, 'digitalServicesCategory'])->name('digital.services.category');
 
     Route::post('/add-to-cart-application/{id}', [App\Http\Controllers\UserControllers\UserController::class, 'addToCartApplication'])->middleware(['auth','verified','require_phone_number']);
     Route::get('/application/{id}/{section}', [App\Http\Controllers\UserControllers\UserController::class, 'fillApplication'])->name('fill-application')->middleware(['auth','verified','require_phone_number']);
@@ -66,28 +67,40 @@ Route::group([
     Route::post('/application/kiberhowpsuzlyk/bolumi', [App\Http\Controllers\UserControllers\UserController::class, 'sendApplicationKiberhowpsuzlykBolumi'])->name('send-application-kiberhowpsuzlyk-bolumi')->middleware(['auth','verified','require_phone_number']);
     Route::post('/application/beyleki/bolumler', [App\Http\Controllers\UserControllers\UserController::class, 'sendApplicationBeylekiBolumler'])->name('send-application-beyleki-bolumler')->middleware(['auth','verified','require_phone_number']);
 
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'profile'])->name('home');
+    Route::get('/email', [App\Http\Controllers\HomeController::class, 'email']);
 
-    Auth::routes(
-        [
-            'register' => true
-        ]
-    );
-
-    Route::get('/home', function(){
-        return redirect()->route('profile', app()->getlocale());
-    } )->name('home');
-
-    Route::get('/profile', [App\Http\Controllers\HomeController::class, 'index'])->name('profile');
+    Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
+    Route::get('/profile/password/change', [App\Http\Controllers\HomeController::class, 'passwordChange'])->name('profile.password.change');
+    Route::post('/profile/password/change', [App\Http\Controllers\HomeController::class, 'passwordChangeEdit'])->name('profile.password.edit');
     Route::get('/profile/cart', [App\Http\Controllers\HomeController::class, 'cart'])->name('profile.cart');
     Route::get('/profile/application', [App\Http\Controllers\HomeController::class, 'application'])->name('profile.application');
     Route::get('/profile/application/create', [App\Http\Controllers\HomeController::class, 'applicationCreate'])->name('profile.application.create');
+    Route::get('/profile/application/create/{id}/{section}', [App\Http\Controllers\HomeController::class, 'applicationCreateSection'])->name('profile.application.create.section');
+    Route::get('/profile/application/{code_number}/docx', [App\Http\Controllers\HomeController::class, 'docx'])->name('profile.docx');
+    Route::get('/profile/{code_number}/docx', [App\Http\Controllers\HomeController::class, 'docx']);
     Route::get('/profile/letterhead', [App\Http\Controllers\HomeController::class, 'letterhead'])->name('profile.letterhead');
-    Route::get('/profile/{code_number}/docx', [App\Http\Controllers\HomeController::class, 'docx'])->name('profile.docx');
+    Route::post('/profile/letterhead/edit', [App\Http\Controllers\HomeController::class, 'letterheadEdit'])->name('profile.letterhead.edit');
     Route::post('/profile/edit', [App\Http\Controllers\HomeController::class, 'profileEdit'])->name('profile.edit');
     Route::post('/profile/form', [App\Http\Controllers\HomeController::class, 'form'])->name('profile.form');
 
-    Route::get('/email', [App\Http\Controllers\HomeController::class, 'email']);
+    Auth::routes(
+        [
+            'login' => true,
+            'register' => true,
+        ]
+    );
+    
 });
+
+Auth::routes(
+    [
+        'login' => false,
+        'register' => false,
+        'reset' => true,
+    ]
+);
 
 require __DIR__ . '/admin-routes/auth/admin-auth-route.php';
 require __DIR__ . '/admin-routes/panel/admin-panel-route.php';
+

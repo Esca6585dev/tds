@@ -18,9 +18,9 @@
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $cart->standart->number }}</td>
                 <td class="show-1200">{{ $cart->standart->{ 'name_' . app()->getlocale() } }}</td>
-                <td class="hide-1200">{{ $cart->standart->name_tm }}</td>
-                <td class="hide-1200">{{ $cart->standart->name_en }}</td>
-                <td class="hide-1200">{{ $cart->standart->name_ru }}</td>
+                @foreach (Config::get('languages') as $lang => $language)
+                <td>{{ $cart->standart->{ 'name_' . $lang } }}</td>
+                @endforeach
                 <td>
                     <span class="btn__cart fa fa-close" onclick="removeFromCartApplication({{ $cart->standart->id }})"></span>
                 </td>

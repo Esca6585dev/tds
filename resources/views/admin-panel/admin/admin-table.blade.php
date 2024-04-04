@@ -7,7 +7,6 @@
                 <th>{{ __('Last Name') }}</th>
                 <th>{{ __('Email') }}</th>
                 <th>{{ __('Username') }}</th>
-                <th>{{ __('Roles') }}</th>
                 <th>{{ __('Actions') }}</th>
             </tr>
         </thead>
@@ -19,11 +18,6 @@
                 <td>{{ $admin->last_name }}</td>
                 <td>{{ $admin->email }}</td>
                 <td>{{ $admin->username }}</td>
-                <td>
-                    @foreach ($admin->roles as $role)
-                        <span class="badge badge-primary">{{ $role->name }}</span>
-                    @endforeach
-                </td>
                 <td>@include('admin-panel.admin.admin-action', [ $admin ])</td>
             </tr>
             @endforeach

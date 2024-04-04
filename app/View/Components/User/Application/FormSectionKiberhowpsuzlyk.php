@@ -31,8 +31,8 @@ class FormSectionKiberhowpsuzlyk extends Component
 
         $childrenSections = Section::where('section_id', $sectionId)->get();
 
-        $current_section = Section::find($this->childrenSectionId);
+        $currentSection = Section::find($this->childrenSectionId);
 
-        return view('components.user.application.form-section-kiberhowpsuzlyk', compact('sections', 'sectionId', 'childrenSections', 'current_section'));
+        return view('components.user.application.form-section-kiberhowpsuzlyk', compact('sections', 'sectionId', 'childrenSections', 'currentSection'));
     }
 }

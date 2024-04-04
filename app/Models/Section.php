@@ -15,10 +15,11 @@ class Section extends Model
         'name_tm',
         'name_en',
         'name_ru',
+        'name_tr',
         'desc_tm',
         'desc_en',
         'desc_ru',
-        'route',
+        'desc_tr',
         'image',
         'section_id',
     ];
@@ -41,5 +42,10 @@ class Section extends Model
     public function childrenSections()
     {
         return $this->hasMany(Section::class)->with('sections');
+    }
+
+    protected function fillableData()
+    {
+        return $this->fillable;
     }
 }

@@ -13,14 +13,12 @@
     <title>{{ __('Login') }} | {{ __('Main State Service «Turkmenstandartary»') }}</title>
 </head>
 <body>
-    <x-user.snowing />
-    
     <div class="container">
         <div class="forms">
             <div class="form login">
                 <div class="form-top">
                     <span class="title">{{ __('Login') }}</span>
-                    <a href="{{ route('main-page', app()->getlocale()) }}">
+                    <a href="{{ route('main-page', app()->getlocale() ) }}">
                         <img class="logo" src="{{ asset('img/tds-logo/tds-logo.webp') }}" alt="img/tds-logo/tds-logo.webp">
                     </a>
                 </div>
@@ -80,7 +78,7 @@
                             <label for="logCheck" class="text">{{ __('Remember Me') }}</label>
                         </div>
                         
-                        <a href="{{ route('password.request', app()->getlocale() ) }}" class="text">{{ __('Forgot Your Password?') }}</a>
+                        <a href="/{{ app()->getlocale() }}/password/reset" class="text">{{ __('Forgot Your Password?') }}</a>
                     </div>
 
                     <div class="input-field button">

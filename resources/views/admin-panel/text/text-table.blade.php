@@ -14,9 +14,9 @@
             @foreach ($texts as $text)
             <tr id="datatable">
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ Str::limit($text->name_tm, 100) }}</td>
-                <td>{{ Str::limit($text->name_en, 100) }}</td>
-                <td>{{ Str::limit($text->name_ru, 100) }}</td>
+                @foreach (Config::get('languages') as $lang => $language)
+                <td>{{ Str::limit($text->{ 'name_' . $lang }) }}</td>
+                @endforeach
                 <td>
                     <a href="{{ route('category.show', [ app()->getlocale(), 'all', $text->parent ? $text->parent->id : $text->id ] ) }}" class="{{ $text->parent ? 'text-warning' : 'text-primary' }}">
                         {{ $text->parent ? $text->parent->{ 'name_' . app()->getlocale() } : __('Parent Category') }}

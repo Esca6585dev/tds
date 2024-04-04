@@ -44,11 +44,10 @@ a:hover {
 .container .forms {
     display: flex;
     align-items: center;
-    height: 500px;
+    height: 525px;
     width: 200%;
     transition: height 0.2s ease;
 }
-
 
 .container .form {
     width: 50%;
@@ -202,6 +201,10 @@ a:hover {
 
 .invalid-feedback {
     color: darkred;
+}
+
+.alert-success {
+    color: forestgreen;
 }
 
 .input-field input.is-invalid {

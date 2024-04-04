@@ -12,7 +12,7 @@ class ApiStandartController extends Controller
     {
         $paginate = $request->paginate ? $request->paginate : 25;
 
-        $standarts = Standart::paginate($paginate);
+        $standarts = Standart::orderBy('id', 'desc')->paginate($paginate);
 
         return response()->json($standarts);
     }

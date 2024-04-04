@@ -21,7 +21,7 @@
     <div class="section__container__grid__web__site">
       @foreach ($websites as $webSite)
         <div class="section__container__web__site__card">
-            <a href="{!! $webSite->{ 'text_' . app()->getlocale() } !!}" target="_blank">
+            <a href="{{ $webSite->url }}" target="_blank">
               <div class="section__container__web__site__image">
                 <img src="{{ asset($webSite->image) }}" alt="{{ asset($webSite->image) }}"/>
               </div>
@@ -31,8 +31,8 @@
                   {{ $webSite->{ 'name_' . app()->getlocale() } }}
                 </div>
                 <div class="section__container__web__site__link">
-                  <a href="{!! $webSite->{ 'text_' . app()->getlocale() } !!}" target="_blank">
-                    {!! $webSite->{ 'text_' . app()->getlocale() } !!}
+                  <a href="{{ $webSite->url }}" target="_blank">
+                    {{ $webSite->url }}
                   </a>
                 </div>
               </div>

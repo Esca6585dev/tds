@@ -207,14 +207,14 @@
 
                                                             @error('name_' . $lang )
                                                             <div class="fv-plugins-message-container invalid-feedback">
-                                                                <div data-field="email" data-validator="notEmpty">
+                                                                <div data-field="name_{{ $lang }}" data-validator="notEmpty">
                                                                     {{ $message }}
                                                                 </div>
                                                             </div>
                                                             @enderror
                                                         </div>
-
                                                     </div>
+
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <label>{{ __('Text') }} ({{ $language['name'] }})</label>
@@ -223,15 +223,15 @@
 
                                                             @error('text_' . $lang )
                                                             <div class="fv-plugins-message-container invalid-feedback">
-                                                                <div data-field="email" data-validator="notEmpty">
+                                                                <div data-field="text_{{ $lang }}" data-validator="notEmpty">
                                                                     {{ $message }}
                                                                 </div>
                                                             </div>
                                                             @enderror
                                                         </div>
-
                                                     </div>
                                                     @endforeach
+
 
                                                     <div class="col-3">
                                                         <div class="form-group">
@@ -256,11 +256,12 @@
                                                         <div class="form-group">
                                                             <label>{{ __('View') }}</label>
 
-                                                            <input type="text" class="form-control @error('view') is-invalid @enderror" name="view" value="{{ $news->view }}{{ request()->segment(count(request()->segments())) == 'create' ? old('view') : 0 }}" >
+                                                            <input type="text" class="form-control @error('view') is-invalid @enderror" name="view" value="{{ $news->view }} {{ request()->segment(count(request()->segments())) == 'create' ? old('view') : 0 }}" >
+                                                            {{ request()->segment(count(request()->segments())) }}
 
                                                             @error('view')
                                                             <div class="fv-plugins-message-container invalid-feedback">
-                                                                <div data-field="email" data-validator="notEmpty">
+                                                                <div data-field="view" data-validator="notEmpty">
                                                                     {{ $message }}
                                                                 </div>
                                                             </div>
@@ -279,7 +280,7 @@
 
                                                             @error('image')
                                                             <div class="fv-plugins-message-container invalid-feedback">
-                                                                <div data-field="email" data-validator="notEmpty">
+                                                                <div data-field="image" data-validator="notEmpty">
                                                                     {{ $message }}
                                                                 </div>
                                                             </div>
@@ -297,7 +298,27 @@
 
                                                             @error('created_at')
                                                             <div class="fv-plugins-message-container invalid-feedback">
-                                                                <div data-field="email" data-validator="notEmpty">
+                                                                <div data-field="created_at" data-validator="notEmpty">
+                                                                    {{ $message }}
+                                                                </div>
+                                                            </div>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-3">
+                                                        <div class="form-group">
+                                                            <label>{{ __('Url') }}</label>
+
+                                                            <input type="text"
+                                                                class="form-control @error('url') is-invalid @enderror"
+                                                                name="url"
+                                                                placeholder="{{ __('Url') }}"
+                                                                value="{{ $news->url ?? '' }}{{ request()->segment(count(request()->segments())) == 'create' ? old('url') : '' }}" />
+
+                                                            @error('url')
+                                                            <div class="fv-plugins-message-container invalid-feedback">
+                                                                <div data-field="url" data-validator="notEmpty">
                                                                     {{ $message }}
                                                                 </div>
                                                             </div>

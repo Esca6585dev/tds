@@ -5,12 +5,14 @@ namespace App\Http\Controllers\AdminControllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Letterhead;
 use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserEditRequest;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\DB;
+use Str;
 
 class UserController extends Controller
 {
@@ -37,7 +39,7 @@ class UserController extends Controller
             if($request->search) {
                 $searchQuery = trim($request->query('search'));
 
-                $requestData = ['first_name', 'last_name', 'email', 'phone_number', 'address', 'company_name'];
+                $requestData = User::fillableData();
 
                 $users = User::where(function($q) use($requestData, $searchQuery) {
                                         foreach ($requestData as $field)
@@ -143,9 +145,11 @@ class UserController extends Controller
 
             $user->update();
 
-            DB::table('model_has_roles')->where('model_id',$user->id)->delete();
+            DB::table('model_has_roles')->where('model_id', $user->id)->delete();
 
             $user->assignRole($request->roles);
+
+            $this->addLetterHead($request, $user);
 
             return redirect()->route('user.index', [ app()->getlocale() ])->with('success-update', 'The resource was updated!');
         }
@@ -163,5 +167,63 @@ class UserController extends Controller
         $user->delete();
 
         return redirect()->route('user.index', [ app()->getlocale() ])->with('success-delete', 'The resource was deleted!');
+    }
+
+    public function addLetterHead($request, $user)
+    {
+        $originalLetterhead = env('APP_URL') . '/img/Emblem_of_Turkmenistan.png';
+        if($user->letterhead != null){
+            $originalLetterhead = $user->letterhead->image;
+        }
+
+        if($request->file('image')){
+            $this->deleteFolder($user);
+
+            $letterheadLogo = $request->file('image');
+
+            $date = date("d-m-Y_H-i-s");
+
+            $code_number = Str::random(10);
+
+            $user_name = $user->first_name . "_" . $user->last_name . "_" . $user->id;
+
+            $fileRandName = 'logo_' . $code_number;
+
+            $fileExt = $letterheadLogo->getClientOriginalExtension();
+
+            $fileName = $fileRandName . '.' . $fileExt;
+
+            $path = "assets/user/" . $user_name . '/';
+
+            $letterheadLogo->move($path, $fileName);
+
+            $originalLetterhead = $path . $fileName;
+        }
+
+        Letterhead::findOrCreate($user->id, [
+            'user_id' => $user->id,
+            'company_name_tm' => $request->company_name_tm, 
+            'company_name_en' => $request->company_name_en, 
+            'address_tm' => $request->address_tm,
+            'address_en' => $request->address_en,
+            'phone_number_tm' => $request->phone_number_tm,
+            'phone_number_en' => $request->phone_number_en,
+            'email_tm' => $request->email_tm,
+            'email_en' => $request->email_en,
+            'image' => $originalLetterhead,
+        ]);
+    }
+
+    public function deleteFolder($user)
+    {
+        if($user->letterhead){
+            if($user->letterhead->image){
+                $folder = explode('/', $user->letterhead->image);
+    
+                if($folder[2] != 'user-seeder'){
+                    \File::deleteDirectory($folder[0] . '/' . $folder[1] . '/' . $folder[2]);
+                }
+            }
+        }
     }
 }

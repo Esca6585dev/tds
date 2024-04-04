@@ -42,8 +42,8 @@
                 {{ $webSite->{ 'name_' . app()->getlocale() } }}
               </div>
               <div class="section__container__web__site__link">
-                <a href="{!! $webSite->{ 'text_' . app()->getlocale() } !!}" target="_blank">
-                  {!! $webSite->{ 'text_' . app()->getlocale() } !!}
+                <a href="{{ $webSite->url }}" target="_blank">
+                  {{ $webSite->url }}
                 </a>
               </div>
             </div>

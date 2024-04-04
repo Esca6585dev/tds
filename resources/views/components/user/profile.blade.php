@@ -2,7 +2,13 @@
 
     <x-user.profile.breadcrumb route="Profile" />
 
-    <h2>{{ __('Profile') }}</h2>
+    <div class="d-flex justify-content-between align-items-center">
+        <h2>{{ __('Profile') }}</h2>
+
+        <div>
+            <a href="{{ route('profile.password.change', app()->getlocale() ) }}" class="btn">{{ __('Password Change') }}</a>
+        </div>
+    </div>
 
     <div class="section__profile__form">
 
@@ -22,30 +28,21 @@
                 <div class="col d-flex">
                     <label class="hide-700" for="first_name">{{ __('First Name') }}</label>
 
-                    <input type="text" name="first_name" class="input @error('first_name') is-invalid @enderror" placeholder="{{ __('First Name') }}" value="{{ Auth::user()->first_name }}" {{ Auth::user()->first_name ? 'disabled' : '' }} >
-
-                    @error('first_name')
-                    <div class="invalid-feedback">
-                        <div data-field="first_name" data-validator="notEmpty">
-                            {{ $message }}
-                        </div>
-                    </div>
-                    @enderror
+                    <input type="text" name="first_name" class="input" placeholder="{{ __('First Name') }}" value="{{ Auth::user()->first_name }}" {{ Auth::user()->first_name ? 'disabled' : '' }} >
                 </div>
             </div>
             <div class="row">
                 <div class="col d-flex">
                     <label class="hide-700" for="last_name">{{ __('Last Name') }}</label>
 
-                    <input type="text" name="last_name" class="input @error('last_name') is-invalid @enderror" placeholder="{{ __('Last Name') }}" value="{{ Auth::user()->last_name }}" {{ Auth::user()->last_name ? 'disabled' : '' }} >
+                    <input type="text" name="last_name" class="input" placeholder="{{ __('Last Name') }}" value="{{ Auth::user()->last_name }}" {{ Auth::user()->last_name ? 'disabled' : '' }} >
+                </div>
+            </div>
+            <div class="row">
+                <div class="col d-flex">
+                    <label class="hide-700" for="email">{{ __('Email Address') }}</label>
 
-                    @error('last_name')
-                    <div class="invalid-feedback">
-                        <div data-field="last_name" data-validator="notEmpty">
-                            {{ $message }}
-                        </div>
-                    </div>
-                    @enderror
+                    <input type="text" name="email" class="input__email" placeholder="{{ __('Email Address') }}" value="{{ Auth::user()->email }}" {{ Auth::user()->email ? 'disabled' : '' }} >
                 </div>
             </div>
             @if(Auth::user()->roles->pluck('name')->first() != 'raýat')
@@ -53,15 +50,7 @@
                 <div class="col d-flex">
                     <label class="hide-700" for="company_name">{{ __('Company name') }}</label>
 
-                    <input type="text" name="company_name" class="input @error('company_name') is-invalid @enderror" placeholder="{{ __('Company name') }}" value="{{ Auth::user()->company_name }}" {{ Auth::user()->company_name ? 'disabled' : '' }} >
-
-                    @error('company_name')
-                    <div class="invalid-feedback">
-                        <div data-field="company_name" data-validator="notEmpty">
-                            {{ $message }}
-                        </div>
-                    </div>
-                    @enderror
+                    <input type="text" name="company_name" class="input" placeholder="{{ __('Company name') }}" value="{{ Auth::user()->company_name }}" {{ Auth::user()->company_name ? 'disabled' : '' }} >
                 </div>
             </div>
             @endif
@@ -69,15 +58,7 @@
                 <div class="col d-flex">
                     <label class="hide-700" for="last_name">{{ __('Address') }}</label>
 
-                    <textarea id="subject" name="address" class="input @error('address') is-invalid @enderror" placeholder="{{ __('Enter your address') }}" style="height:100px" {{ Auth::user()->address ? 'disabled' : '' }} >{{ Auth::user()->address }}</textarea>
-
-                    @error('address')
-                    <div class="invalid-feedback">
-                        <div data-field="address" data-validator="notEmpty">
-                            {{ $message }}
-                        </div>
-                    </div>
-                    @enderror
+                    <textarea id="subject" name="address" class="input" placeholder="{{ __('Enter your address') }}" style="height:100px" {{ Auth::user()->address ? 'disabled' : '' }} >{{ Auth::user()->address }}</textarea>
                 </div>
             </div>
             <div class="row">
@@ -86,7 +67,7 @@
 
                     <div class="form__profile__phone__number">
                         <span class="phone__number__code">+993</span>
-                        <input type="text" name="phone_number" id="phone_number" class="input @error('phone_number') is-invalid @enderror @if(Auth::user()->phone_number == null) is-invalid @endif" placeholder="{{ __('Enter your phone-number') }}" value="{{ old('phone_number') ?? Auth::user()->phone_number }}" {{ Auth::user()->phone_number ? 'disabled' : '' }}>
+                        <input type="text" name="phone_number" id="phone_number" class="input" placeholder="{{ __('Enter your phone-number') }}" value="{{ old('phone_number') ?? Auth::user()->phone_number }}" {{ Auth::user()->phone_number ? 'disabled' : '' }}>
                         
                         @if(Auth::user()->phone_number == null)
                         <div class="invalid-feedback">
@@ -97,47 +78,28 @@
                         @endif
 
                     </div>
-
-                    
-
-                    @error('phone_number')
-                    <div class="invalid-feedback">
-                        <div data-field="phone_number" data-validator="notEmpty">
-                            {{ $message }}
-                        </div>
-                    </div>
-                    @enderror
                 </div>
             </div>
 
             <div class="row">
                 <div class="col d-flex">
-                    <label>{{ __('Roles') }}</label>
-
-                    <select name="roles" id="role" class="show__btn @error('roles') is-invalid @enderror" {{ Auth::user()->roles->pluck('name')->first() ? 'disabled' : '' }}>
-                        @foreach ($roles as $role)
+                    <label class="hide-700" for="roles">{{ __('Roles') }}</label>
+                    
+                    <select name="roles" id="role" class="show__btn" {{ Auth::user()->roles->pluck('name')->first() ? 'disabled' : '' }} >
+                        @foreach($roles as $role)
                             <option value="{{ $role }}" {{ Auth::user()->roles->pluck('name')->first() == $role ? 'selected=selected' : '' }} >{{ $role }}</option>
                         @endforeach
                     </select>
-
-                    @error('roles')
-                    <div class="invalid-feedback">
-                        <div data-field="roles" data-validator="notEmpty">
-                            {{ $message }}
-                        </div>
-                    </div>
-                    @enderror
                 </div>
             </div>
 
             <div class="row hide" id="div__buttons">
                 <div class="col d-flex justify-content-center align-items-center pt-10">
-                    <button type="button" class="btn p-10-20 ma-10 w-200" onclick="inputDisable()">{{ __('Cancel') }}</button>
-                    <button type="button" class="btn p-10-20 ma-10 w-200 bg-goldenrod" onclick="saveData()" >{{ __('Save') }}</button>
+                    <button type="button" class="btn p-10-20 ma-10 w-100-p" onclick="inputDisable()">{{ __('Cancel') }}</button>
+                    <button type="button" class="btn p-10-20 ma-10 w-100-p bg-goldenrod" onclick="saveData()" >{{ __('Save') }}</button>
                 </div>
             </div>
         </form>
 
     </div>
-
 </div>

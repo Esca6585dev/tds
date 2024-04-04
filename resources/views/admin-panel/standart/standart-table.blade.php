@@ -15,9 +15,9 @@
             <tr id="datatable">
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $standart->number }}</td>
-                <td>{{ $standart->name_tm }}</td>
-                <td>{{ $standart->name_en }}</td>
-                <td>{{ $standart->name_ru }}</td>
+                @foreach (Config::get('languages') as $lang => $language)
+                <td>{{ $standart->{ 'name_' . $lang } }}</td>
+                @endforeach
                 <td>@include('admin-panel.standart.standart-action', [ $standart ])</td>
             </tr>
             @endforeach

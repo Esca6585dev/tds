@@ -35,7 +35,7 @@ class NewsController extends Controller
             if($request->search) {
                 $searchQuery = trim($request->query('search'));
                 
-                $requestData = ['name_tm','name_en','name_ru','text_tm','text_en','text_ru', 'view', 'created_at', 'updated_at'];
+                $requestData = News::fillableData();
     
                 $news = News::where(function($q) use($requestData, $searchQuery) {
                                         foreach ($requestData as $field)
@@ -91,12 +91,16 @@ class NewsController extends Controller
         $news->name_tm = $request->name_tm;
         $news->name_en = $request->name_en;
         $news->name_ru = $request->name_ru;
+        $news->name_tr = $request->name_tr;
         
         $news->text_tm = $request->text_tm;
         $news->text_en = $request->text_en;
         $news->text_ru = $request->text_ru;
+        $news->text_tr = $request->text_tr;
 
         $news->view = $request->view;
+
+        $news->url = $request->url;
 
         $news->created_at = $request->created_at;
 
@@ -166,12 +170,15 @@ class NewsController extends Controller
         $news->name_tm = $request->name_tm;
         $news->name_en = $request->name_en;
         $news->name_ru = $request->name_ru;
+        $news->name_tr = $request->name_tr;
         
         $news->text_tm = $request->text_tm;
         $news->text_en = $request->text_en;
-        $news->text_ru = $request->text_ru;
+        $news->text_tr = $request->text_tr;
 
         $news->view = $request->view;
+
+        $news->url = $request->url;
 
         $news->created_at = $request->created_at;
 

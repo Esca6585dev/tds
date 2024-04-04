@@ -36,7 +36,7 @@
           <li>
             <div class="dropdown">
               <button class="dropbtn" onclick="dropDown({{ $category->id }})">{{ $category->{ 'name_' . app()->getlocale() } }}
-                <i class="fa fa-caret-down" id="fa_dropdown_{{ $category->id }}"></i>
+                <i class="fa fa-angle-down" id="fa_dropdown_{{ $category->id }}"></i>
               </button>
               <div class="dropdown-content myDropdown" id="myDropdown_{{ $category->id }}">
                 @foreach ($category->childrenCategories as $childCategory)
@@ -55,7 +55,7 @@
                 @foreach (Config::get('languages') as $lang => $language)
                   {{ app()->getlocale() == $lang ? $language['name'] : '' }}
                 @endforeach
-                <i class="fa fa-caret-down" id="fa_dropdown_33"></i>
+                <i class="fa fa-angle-down" id="fa_dropdown_33"></i>
               </button>
               <div class="dropdown-content myDropdown" id="myDropdown_33">
                 @foreach (Config::get('languages') as $lang => $language)
@@ -74,7 +74,7 @@
           <li>
             <div class="dropdown">
               <button class="dropbtn" onclick="dropDown(44)">{{ __('Profile') }}
-                <i class="fa fa-caret-down" id="fa_dropdown_44"></i>
+                <i class="fa fa-angle-down" id="fa_dropdown_44"></i>
               </button>
               <div class="dropdown-content myDropdown" id="myDropdown_44">
                 <a href="{{ route('login', app()->getlocale() ) }}">{{ __('Login') }}</a>
@@ -88,8 +88,8 @@
       <div class="header__wrapper__right">
         <div class="symbol">
           <img
-            src="{{ asset('img/tds-logo/dowlet-nyshany-2024.jpg') }}"
-            alt="{{ asset('img/tds-logo/dowlet-nyshany-2024.jpg') }}"
+            src="{{ asset('img/tds-logo/dowlet-nyshany-2024.png') }}"
+            alt="{{ asset('img/tds-logo/dowlet-nyshany-2024.png') }}"
           />
         </div>
       </div>

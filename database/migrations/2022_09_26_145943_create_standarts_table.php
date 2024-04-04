@@ -16,6 +16,7 @@ class CreateStandartsTable extends Migration
         Schema::create('standarts', function (Blueprint $table) {
             $table->id();
             $table->string('number')->unique();
+            
             $table->text('name_tm');
             $table->text('name_en');
             $table->text('name_ru');

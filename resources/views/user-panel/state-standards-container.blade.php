@@ -36,7 +36,7 @@
         <input type="search" id="datatable_search" class="search__input" placeholder="{{ __('Search') }}...">
 
         <span class="clear__btn" id="search_clear">
-        <i class="fa fa-close"></i>
+            <i class="fa fa-close"></i>
         </span>
     </div>
 

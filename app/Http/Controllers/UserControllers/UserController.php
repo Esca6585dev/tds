@@ -17,30 +17,44 @@ use App\Models\Message;
 use App\Models\Section;
 use Spatie\Permission\Models\Role;
 use App\Events\ApplicationRegistered;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\AddToNameTrStandart;
+use Stevebauman\Location\Facades\Location;
 use Auth;
 use Str;
 use File;
-use Mail;
 use QrCode;
 
 class UserController extends Controller
 {
-    public function index()
+    public function export()
     {
-    return view('user-panel.index');
+        return Excel::download(new \App\Exports\UsersExport, 'users.xlsx');
+    }
+    
+    public function goToMainPage(Request $request)
+    {
+        $location = Location::get($request->ip());
+
+        if($location){
+            if (in_array(Str::lower($location->countryCode), config('app.locales'))) {
+                return redirect()->route('main-page', Str::lower($location->countryCode));
+            }
+        }
+
+        return redirect()->route('main-page', 'en');
+    }
+
+    public function mainPage()
+    {
+        return view('user-panel.main-page');
     }
 
     public function category($lang, $id)
     {
-        $categories = Category::where('category_id', null)->get();
-
-        $subCategories = Category::where('category_id', $id)->get();
-
         $currentCategory = Category::findOrFail($id);
 
-        $text = Text::where('category_id', $id)->first();
-
-        return view('user-panel.category', compact('categories', 'subCategories', 'currentCategory', 'text'));
+        return view('user-panel.category', compact('currentCategory', 'id'));
     }
 
     public function stateStandards(Request $request, $lang, $pagination = 25)
@@ -63,7 +77,7 @@ class UserController extends Controller
             if($request->search) {
                 $searchQuery = trim($request->query('search'));
 
-                $requestData = ['number', 'name_tm', 'name_en', 'name_ru'];
+                $requestData = Standart::fillableData();
 
                 $standarts = Standart::where(function($q) use($requestData, $searchQuery) {
                                         foreach ($requestData as $field)
@@ -81,7 +95,7 @@ class UserController extends Controller
         if(Auth::check()){
             if(Cart::where('user_id', Auth()->id())->where('standart_id', $id)->exists()){
                 Cart::where('user_id', Auth()->id())->where('standart_id', $id)->delete();
-                return "tds was removed to cart";
+                return __('tds was removed to cart');
             } else {
                 $cart = new Cart;
 
@@ -91,15 +105,22 @@ class UserController extends Controller
 
                 $cart->save();
 
-                return "tds was added to cart";
+                return __('tds was added to cart');
             }
         }
-        return "401 Unauthorized";
+        return __('401 Unauthorized');
     }
 
     public function digitalServices()
     {
-        return view('user-panel.digitalServices');
+        return view('user-panel.digital-services');
+    }
+
+    public function digitalServicesCategory($lang, $id, $slug)
+    {
+        $currentSection = Section::findOrFail($id);
+
+        return view('user-panel.digital-services-category', compact('currentSection', 'id'));
     }
 
     public function fillApplication($lang, $childrenSectionId, $slug)
@@ -196,6 +217,73 @@ class UserController extends Controller
                 $fontStyle->setName('Times New Roman');
                 $fontStyle->setSize(14);
 
+                $fontStyleBlankCompanyName = new \PhpOffice\PhpWord\Style\Font();
+                $fontStyleBlankCompanyName->setName('Times New Roman');
+                $fontStyleBlankCompanyName->setSize(12);
+                $fontStyleBlankCompanyName->setColor('#4989de');
+
+                $fontStyleBlank = new \PhpOffice\PhpWord\Style\Font();
+                $fontStyleBlank->setName('Times New Roman');
+                $fontStyleBlank->setSize(8);
+                $fontStyleBlank->setColor('#4989de');
+
+                $companyLogo = file_get_contents(Auth::user()->letterhead->image);
+
+                // ====================== BEGIN company_name_tm =================================
+
+                $table = $section->addTable();
+                $table->addRow();
+
+                $cell = $table->addCell(3500);
+                $textrun = $cell->addTextRun();
+
+                $textrun->addText($request->company_name_tm, $fontStyleBlankCompanyName, array('align'=>'left'));
+                $textrun->addImage($companyLogo, ['width'=>50, 'height'=>50, 'align'=>'justify']);
+                $table->addCell(3500)->addPreserveText($request->company_name_en, $fontStyleBlankCompanyName, array('align'=>'right'));
+
+                // ====================== END company_name_tm ===================================
+
+                // ====================== BEGIN address_tm =================================
+
+                $table = $section->addTable();
+                $table->addRow();
+
+                $cell = $table->addCell(4500);
+                $textrun = $cell->addTextRun();
+
+                $textrun->addText($request->address_tm, $fontStyleBlank, array('align'=>'left'));
+                $table->addCell(4500)->addPreserveText($request->address_en, $fontStyleBlank, array('align'=>'right'));
+
+                // ====================== END address_tm ===================================
+
+                // ====================== BEGIN phone_number_tm =================================
+
+                $table = $section->addTable();
+                $table->addRow();
+
+                $cell = $table->addCell(4500);
+                $textrun = $cell->addTextRun();
+
+                $textrun->addText($request->phone_number_tm, $fontStyleBlank, array('align'=>'left'));
+                $table->addCell(4500)->addPreserveText($request->phone_number_en, $fontStyleBlank, array('align'=>'right'));
+
+                // ====================== END phone_number_tm ===================================
+
+
+                // ====================== BEGIN email_tm =================================
+
+                $table = $section->addTable();
+                $table->addRow();
+
+                $cell = $table->addCell(4500);
+                $textrun = $cell->addTextRun();
+
+                $textrun->addText($request->email_tm, $fontStyleBlank, array('align'=>'left'));
+                $table->addCell(4500)->addPreserveText($request->email_en, $fontStyleBlank, array('align'=>'right'));
+
+                // ====================== END email_tm ===================================
+                
+
                 $section->addTextBreak(3);
 
                 $section->addText("Türkmen standartlar", $fontStyle, array("align" => "right"));
@@ -248,7 +336,8 @@ class UserController extends Controller
 
                 $section->addTextBreak(3);
 
-                $qrCode = QrCode::format('png')->size(75)->generate('https://tds.gov.tm/tm/profile/' . $code_number . '/docx');
+                $filePath = 'https://tds.gov.tm/' . app()->getlocale() . '/' . 'profile/';
+                $qrCode = QrCode::format('png')->size(75)->generate($filePath . $code_number . '/docx');
 
                 $section->addImage($qrCode);
 
@@ -331,10 +420,11 @@ class UserController extends Controller
 
                 $section->addTextBreak(3);
 
-                $qrCode = QrCode::format('png')->size(75)->generate('https://tds.gov.tm/tm/profile/' . $code_number . '/docx');
+                $filePath = 'https://tds.gov.tm/' . app()->getlocale() . '/' . 'profile/';
+                $qrCode = QrCode::format('png')->size(75)->generate($filePath . $code_number . '/docx');
 
                 $section->addImage($qrCode);
-
+                
                 $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
 
                 $user_name = Auth::user()->first_name . "_" . Auth::user()->last_name . "_" . Auth::user()->id;
@@ -440,11 +530,8 @@ class UserController extends Controller
                 'middle' => 'required',
                 'head' => 'required',
                 'button__type' => 'required',
-                'phone_number' => 'required|min:29'
             ]);
         }
-
-        $heading = explode(" ",$request->head);
 
         $phpWord = new \PhpOffice\PhpWord\PhpWord();
 
@@ -495,7 +582,8 @@ class UserController extends Controller
 
         $section->addTextBreak(3);
 
-        $qrCode = QrCode::format('png')->size(75)->generate('https://tds.gov.tm/tm/profile/' . $code_number . '/docx');
+        $filePath = 'https://tds.gov.tm/' . app()->getlocale() . '/' . 'profile/';
+        $qrCode = QrCode::format('png')->size(75)->generate($filePath . $code_number . '/docx');
 
         $section->addImage($qrCode);
 
@@ -641,7 +729,8 @@ class UserController extends Controller
 
         $section->addTextBreak(3);
 
-        $qrCode = QrCode::format('png')->size(75)->generate('https://tds.gov.tm/tm/profile/' . $code_number . '/docx');
+        $filePath = 'https://tds.gov.tm/' . app()->getlocale() . '/' . 'profile/';
+        $qrCode = QrCode::format('png')->size(75)->generate($filePath . $code_number . '/docx');
 
         $section->addImage($qrCode);
 
@@ -785,7 +874,8 @@ class UserController extends Controller
 
         $section->addTextBreak(3);
 
-        $qrCode = QrCode::format('png')->size(75)->generate('https://tds.gov.tm/tm/profile/' . $code_number . '/docx');
+        $filePath = 'https://tds.gov.tm/' . app()->getlocale() . '/' . 'profile/';
+        $qrCode = QrCode::format('png')->size(75)->generate($filePath . $code_number . '/docx');
 
         $section->addImage($qrCode);
 
@@ -911,10 +1001,10 @@ class UserController extends Controller
     public function sendMessage(Request $request)
     {
         $request->validate([
-            'username' => 'required',
-            'phone_number' => 'required',
-            'email' => 'required|email',
-            'message' => 'required',
+            'username' => ['required', 'min:3', 'max:50'],
+            'phone_number' => ['required', 'string', 'min:3', 'max:50'],
+            'email' => ['required', 'string', 'email', 'max:50', 'unique:users', 'email_checker'],
+            'message' => ['required', 'min:10', 'max:100'],
         ]);
 
         $message = new Message;
@@ -928,38 +1018,13 @@ class UserController extends Controller
 
         $message->save();
 
+        event(new MessageSend($message));
+
         return back()->with('success-order', 'Your message sent successfully!');
     }
 
     public function eSign(Request $request)
     {
         return view('user-panel.e-sign');
-    }
-
-    public function country()
-    {
-        // This creates the Reader object, which should be reused across
-        // lookups.
-        $reader = new Reader('/usr/local/share/GeoIP/GeoIP2-City.mmdb');
-
-        // Replace "city" with the appropriate method for your database, e.g.,
-        // "country".
-        $record = $reader->city('128.101.101.101');
-
-        print($record->country->isoCode . "\n"); // 'US'
-        print($record->country->name . "\n"); // 'United States'
-        print($record->country->names['zh-CN'] . "\n"); // '美国'
-
-        print($record->mostSpecificSubdivision->name . "\n"); // 'Minnesota'
-        print($record->mostSpecificSubdivision->isoCode . "\n"); // 'MN'
-
-        print($record->city->name . "\n"); // 'Minneapolis'
-
-        print($record->postal->code . "\n"); // '55455'
-
-        print($record->location->latitude . "\n"); // 44.9733
-        print($record->location->longitude . "\n"); // -93.2323
-
-        print($record->traits->network . "\n"); // '128.101.101.101/32'
     }
 }

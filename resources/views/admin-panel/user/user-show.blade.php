@@ -28,7 +28,6 @@
     type="text/css" />
 <link href="{{ asset('metronic-template/v7/assets/css/themes/layout/aside/dark.css') }}" rel="stylesheet"
     type="text/css" />
-
 @endsection
 
 @section('body')
@@ -183,14 +182,25 @@
                                             <h4 class="font-weight-bolder text-dark mb-7">{{ $user->email }}</h4>
                                             <h4 class="font-weight-bolder text-dark mb-7">{{ $user->phone_number }}</h4>
                                             <h4 class="font-weight-bolder text-dark mb-7">
-                                                @if($user->isBusinessman)
-                                                <span class="badge badge-success">Telekçi</span>
-                                                @else
-                                                <span class="badge badge-primary">Raýat</span>
+                                                @if($user->roles->pluck("name")->first() == 'raýat')
+                                                    <span class="badge badge-warning">{{ $user->roles->pluck("name")->first() }}</span>
+                                                @elseif($user->roles->pluck("name")->first() == 'telekeçi')
+                                                    <span class="badge badge-primary">{{ $user->roles->pluck("name")->first() }}</span>
+                                                @elseif($user->roles->pluck("name")->first() == 'döwlet-edara')
+                                                    <span class="badge badge-success">{{ $user->roles->pluck("name")->first() }}</span>
                                                 @endif
                                             </h4>
-                                            <h4 class="font-weight-bolder text-dark mb-7">{{ $user->email }}</h4>
                                         </div>
+                                
+                                        <div class="section__container__body mx-4 mt-10">
+                                            <div class="section__container__word">
+
+                                                <div class="section__sample">
+                                                    <x-user.blank.company :id="$user->id" />
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                                 <!--begin::Buttons-->
@@ -208,6 +218,16 @@
                                             </svg>
                                         </span>
                                     </a>
+
+                                    <a href="{{ route(Request::segment(3) . '.edit', [ app()->getlocale(), $user->id ] ) }}"
+                                        title="{{ __('Edit') }}"
+                                        class="btn btn-warning font-weight-bolder">
+                                        
+                                        <span class="{{ $user->id ? 'text-dark' : '' }}">
+                                            {{ __('Edit') }}
+                                        </span>
+                                    </a>
+                                    
                                 </div>
                                 <!--end::Buttons-->
                             </div>

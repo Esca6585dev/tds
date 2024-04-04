@@ -175,9 +175,9 @@
         </div>
 
         <div class="section__container__application__wrapper">
-            <p id="section_description" class="section_application_description color__red">
+            <div id="section_description" class="section_application_description color__red">
                 *{{ __('Select a section to get a list of Required Documents!') }}
-            </p>
+            </div>
         </div>
 
     </div>

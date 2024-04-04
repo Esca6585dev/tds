@@ -11,6 +11,7 @@
                 <th>{{ __('Are you Businessman?') }}</th>
                 <th>{{ __('Company name') }}</th>
                 <th>{{ __('Active') }}</th>
+                <th>{{ __('Created time') }}</th>
                 <th>{{ __('Actions') }}</th>
             </tr>
         </thead>
@@ -43,6 +44,9 @@
                     @else
                     <span class="badge badge-success">{{ __('Active') }}</span>
                     @endif
+                </td>
+                <td>
+                    <span class="badge badge-secondary">{{ \Carbon::parse($user->created_at)->locale(config('app.faker_locales.' . app()->getlocale() ))->isoFormat('LLLL') }}</span>
                 </td>
                 <td>@include('admin-panel.user.user-action', [ $user ])</td>
             </tr>

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\AdminControllers\Section;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
 use App\Http\Requests\SectionRequest;
 use App\Models\Section;
 use Image;
@@ -39,7 +38,7 @@ class SectionController extends Controller
             if($request->search) {
                 $searchQuery = trim($request->query('search'));
                 
-                $requestData = ['name_tm', 'name_en', 'name_ru', 'desc_tm', 'desc_en', 'desc_ru', 'route'];
+                $requestData = Section::fillableData();
     
                 $sections = Section::where(function($q) use($requestData, $searchQuery) {
                                         foreach ($requestData as $field)
@@ -95,13 +94,13 @@ class SectionController extends Controller
         $section->name_tm = $request->name_tm;
         $section->name_en = $request->name_en;
         $section->name_ru = $request->name_ru;
+        $section->name_tr = $request->name_tr;
 
         $section->desc_tm = $request->desc_tm;
         $section->desc_en = $request->desc_en;
         $section->desc_ru = $request->desc_ru;
+        $section->desc_tr = $request->desc_tr;
         
-        $section->route = $request->route;
-
         $section->image = $originalImage ?? null;
 
         $section->section_id = $request->section_id;
@@ -166,13 +165,13 @@ class SectionController extends Controller
         $section->name_tm = $request->name_tm;
         $section->name_en = $request->name_en;
         $section->name_ru = $request->name_ru;
+        $section->name_tr = $request->name_tr;
 
         $section->desc_tm = $request->desc_tm;
         $section->desc_en = $request->desc_en;
         $section->desc_ru = $request->desc_ru;
+        $section->desc_tr = $request->desc_tr;
 
-        $section->route = $request->route;
-        
         $section->section_id = $request->section_id;
         
         $section->update();

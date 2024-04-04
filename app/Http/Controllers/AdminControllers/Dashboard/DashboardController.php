@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Application;
 use App\Models\Standart;
+use App\Models\Message;
 
 class DashboardController extends Controller
 {
@@ -15,7 +16,7 @@ class DashboardController extends Controller
         $this->middleware(['auth:admin']);
     }
 
-    public function index($categoryType)
+    public function dashboard($categoryType)
     {
         $users = User::count();
 
@@ -23,6 +24,8 @@ class DashboardController extends Controller
 
         $standarts = Standart::count();
 
-        return view('admin-panel.dashboard.dashboard', compact('categoryType', 'users', 'applications', 'standarts'));
+        $messages = Message::count();
+
+        return view('admin-panel.dashboard.dashboard', compact('categoryType', 'users', 'applications', 'standarts', 'messages'));
     }
 }

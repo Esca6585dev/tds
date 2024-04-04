@@ -6,9 +6,9 @@
                 <th>ID</th>
                 <th>{{ __('First Name') }} {{ __('and') }} {{ __('Last Name') }}</th>
                 <th class="hide-1200">{{ __('IP Address') }}</th>
-                <th class="hide-700">{{ __('Address') }}</th>
+                <th class="hide-900">{{ __('Address') }}</th>
                 <th>{{ __('Phone number') }}</th>
-                <th class="hide-700">{{ __('Date') }}</th>
+                <th class="hide-900">{{ __('Date') }}</th>
                 <th>{{ __('Section') }}</th>
                 <th>{{ __('Code number') }}</th>
                 <th>{{ __('Download') }}</th>
@@ -21,9 +21,9 @@
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $application->user->first_name }} {{ $application->user->last_name }}</td>
                 <td class="hide-1200">{{ $application->ip_address }}</td>
-                <td class="hide-700">{{ $application->user->address }}</td>
+                <td class="hide-900">{{ $application->user->address }}</td>
                 <td>+993 {{ $application->user->phone_number }}</td>
-                <td class="hide-700">{{ \Carbon::parse($application->created_at)->locale(config('app.faker_locales.' . app()->getlocale() ))->isoFormat('LLLL') }}</td>
+                <td class="hide-900">{{ \Carbon::parse($application->created_at)->locale(config('app.faker_locales.' . app()->getlocale() ))->isoFormat('LLLL') }}</td>
                 <td>{{ $application->bolum }}</td>
                 <td>{{ $application->code_number }}</td>
                 <td>

@@ -58,4 +58,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasOne(Letterhead::class,'user_id', 'id');
     }
+
+    protected function fillableData()
+    {
+        return $this->fillable;
+    }
 }

@@ -27,9 +27,7 @@ class CategoryRequest extends FormRequest
             'name_tm' => 'required',
             'name_en' => 'required',
             'name_ru' => 'required',
-            'desc_tm' => 'required',
-            'desc_en' => 'required',
-            'desc_ru' => 'required',
+            'name_tr' => 'required',
             'section_id' => 'nullable',
         ];
 

@@ -141,12 +141,12 @@
                                     <ul
                                         class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
                                         <li class="breadcrumb-item text-muted">
-                                            <a href="" class="text-muted">{{ __('Categories') }}</a>
+                                            <a href="" class="text-muted">{{ __('Application') }}</a>
                                         </li>
 
                                         <li class="breadcrumb-item text-muted">
                                             <a href="" class="text-muted">
-                                                {{ __( ucfirst(Request::segment(3)) . ' Categories') }}
+                                                {{ __('Application') }}
                                             </a>
                                         </li>
                                     </ul>
@@ -209,6 +209,19 @@
                                             </h4>
                                         </div>
                                     </div>
+                                    @if($location)
+                                    <div class="col-xxl-7 pl-xxl-11">
+                                        <h4 class="font-weight-bolder text-dark mb-7">{{ __('Country Name') }}: {{ $location->countryName }} - ({{ $location->countryCode }})</h4>
+                                        <h4 class="font-weight-bolder text-dark mb-7">{{ __('Currency') }}: {{ $location->currencyCode }}</h4>
+                                        <h4 class="font-weight-bolder text-dark mb-7">{{ __('Region Code') }}: {{ $location->regionCode }}</h4>
+                                        <h4 class="font-weight-bolder text-dark mb-7">{{ __('Region Name') }}: {{ $location->regionName }}</h4>
+                                        <h4 class="font-weight-bolder text-dark mb-7">{{ __('City Name') }}: {{ $location->cityName }}</h4>
+                                        <h4 class="font-weight-bolder text-dark mb-7">{{ __('Zip Code') }}: {{ $location->zipCode }}</h4>
+                                        <h4 class="font-weight-bolder text-dark mb-7">{{ __('Location') }}: <a href="https://www.google.com/maps/place/{{ $location->latitude }}, {{ $location->longitude }}/@{{ $location->latitude }}, {{ $location->longitude }}/data=!3m1!1e3" target="_blank">{{ $location->latitude }}, {{ $location->longitude }}</a></h4>
+                                        <h4 class="font-weight-bolder text-dark mb-7">{{ __('Area Code') }}: {{ $location->areaCode }}</h4>
+                                        <h4 class="font-weight-bolder text-dark mb-7">{{ __('Timezone') }}: {{ $location->timezone }}</h4>
+                                    </div>
+                                    @endif
                                 </div>
                                 <!--begin::Buttons-->
                                 <div class="card-footer d-flex justify-content-between">

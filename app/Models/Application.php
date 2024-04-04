@@ -24,14 +24,19 @@ class Application extends Model
         return $this->hasOne(User::class, 'id', 'user_id');
     }
 
-    public function filterNumber($phone_number)
-    {
-        // Filter the Numbers from String 
-        return ltrim(preg_replace('/[^0-9]/', '', $phone_number), '993');
-    }
-
     public function section()
     {
         return $this->hasOne(Section::class, 'id', 'bolum');
+    }
+
+    public function filterNumber($phone_number)
+    {
+        // Filter the Numbers from String
+        return ltrim(preg_replace('/[^0-9]/', '', $phone_number), '993');
+    }
+
+    protected function fillableData()
+    {
+        return $this->fillable;
     }
 }

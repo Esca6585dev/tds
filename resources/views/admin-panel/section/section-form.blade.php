@@ -221,7 +221,9 @@
                                                         <div class="form-group">
                                                             <label>{{ __('Description') }} ({{ $language['name'] }})</label>
 
-                                                            <textarea class="summernote @error('desc_' . $lang ) is-invalid @enderror" id="kt_summernote_1" name="desc_{{ $lang }}" >{{ $section->{ 'desc_' . $lang } ?? '' }}{{ request()->segment(count(request()->segments())) == 'create' ? old('desc_' . $lang) : '' }}</textarea>
+                                                            <textarea 
+                                                                    class="summernote @error('desc_' . $lang ) is-invalid @enderror" 
+                                                                    id="kt_summernote_1" name="desc_{{ $lang }}" >{{ $section->{ 'desc_' . $lang } }}</textarea>
 
                                                             @error('desc_' . $lang )
                                                             <div class="fv-plugins-message-container invalid-feedback">
@@ -234,26 +236,6 @@
 
                                                     </div>
                                                     @endforeach
-
-                                                    <div class="col-4">
-                                                        <div class="form-group">
-                                                            <label>{{ __('Route') }}</label>
-
-                                                            <input type="text"
-                                                                class="form-control @error('route') is-invalid @enderror"
-                                                                name="route"
-                                                                placeholder="{{ __('Route') }}"
-                                                                value="{{ $section->route ?? '' }}{{ request()->segment(count(request()->segments())) == 'create' ? old('route') : '' }}" />
-
-                                                            @error('route')
-                                                            <div class="fv-plugins-message-container invalid-feedback">
-                                                                <div data-field="route" data-validator="notEmpty">
-                                                                    {{ $message }}
-                                                                </div>
-                                                            </div>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
 
                                                     <div class="col-4">
                                                         <div class="form-group">

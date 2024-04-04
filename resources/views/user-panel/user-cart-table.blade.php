@@ -21,6 +21,9 @@
                 <td class="hide-1200">{{ $cart->standart->name_tm }}</td>
                 <td class="hide-1200">{{ $cart->standart->name_en }}</td>
                 <td class="hide-1200">{{ $cart->standart->name_ru }}</td>
+                @foreach (Config::get('languages') as $lang => $language)
+                <td>{{ $cart->{ 'name_' . $lang } }}</td>
+                @endforeach
                 <td>
                     <button type="button" class="btn" onclick="removeFromCartApplication({{ $cart->standart->id }})">
                         <i class="fa fa-close"></i>

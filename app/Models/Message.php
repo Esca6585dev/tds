@@ -22,4 +22,9 @@ class Message extends Model
     {
         return $this->hasOne(User::class,'user_id', 'id');
     }
+
+    protected function fillableData()
+    {
+        return $this->fillable;
+    }
 }

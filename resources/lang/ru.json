@@ -26,6 +26,8 @@
     "Email Address": "Электронная почта",
     "Forgot Your Password?": "Забыли пароль?",
     "Forgot your password?": "Забыли пароль?",
+    "Your password has been changed!": "Ваш пароль был изменен!",
+    "Current Password does not match with Old Password": "Текущий пароль не совпадает со старым паролем",
     "Forgot Password Title": "Введите свой адрес электронной почты, и мы отправим вам ссылку для сброса пароля.",
     "Hi": "Привет",
     "Hello!": "Привет!",
@@ -50,7 +52,10 @@
     "Create an Account": "Создать аккаунт",
     "Hint": "Используйте 8 или более символов, состоящих из букв, цифр и символов.",
     "Logout": "Выйти",
+    "Current Password": "Текущий пароль",
+    "New password": "Новый пароль",
     "Password": "Пароль",
+    "Password change": "Изменение пароля",
     "Agree": "Я согласен",
     "Terms": "Условия",
     "Remember Me": "Запомнить меня",
@@ -574,5 +579,8 @@
     "Please enter your phone number!": "Пожалуйста введите ваш номер телефона!",
     "Letterhead": "Фирменный бланк",
     "letterhead": "фирменный бланк",
-    "Select a section to get a list of Required Documents!": "Выберите раздел, чтобы получить список необходимых документов!"
+    "Emblem": "Герб",
+    "Select a section to get a list of Required Documents!": "Выберите раздел, чтобы получить список необходимых документов!",
+    "If you want to change your company logo go to profile section": "Если вы хотите изменить логотип своей компании, перейдите в раздел профиля",
+    "We request that you change the company logo!": "Просим Вас изменить логотип компании!"
 }

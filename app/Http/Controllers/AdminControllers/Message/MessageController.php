@@ -29,7 +29,7 @@ class MessageController extends Controller
             if($request->search) {
                 $searchQuery = trim($request->query('search'));
                 
-                $requestData = ['name', 'phone_number', 'email', 'messages'];
+                $requestData = Message::fillableData();
     
                 $messages = Message::where(function($q) use($requestData, $searchQuery) {
                                         foreach ($requestData as $field)

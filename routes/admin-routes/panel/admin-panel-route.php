@@ -13,7 +13,7 @@ Route::group([
 ], function () {
     
     Route::prefix('admin')->group(function(){
-        Route::get('/dashboard', [App\Http\Controllers\AdminControllers\Dashboard\DashboardController::class, 'index'])->name('admin.dashboard');
+        Route::get('/dashboard', [App\Http\Controllers\AdminControllers\Dashboard\DashboardController::class, 'dashboard'])->name('admin.dashboard');
         
         Route::resources([
             '/{categoryType}/category' => App\Http\Controllers\AdminControllers\Category\CategoryController::class,

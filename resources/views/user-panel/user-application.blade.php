@@ -9,7 +9,7 @@
         <h2>{{ __('Applications') }}</h2>
 
         <div>
-          <a href="{{ route('profile.application.create', app()->getlocale() ) }}" class="btn">{{ __('Application') }} {{ __('Create') }}</a>
+          <a href="{{ route('profile.application.create', app()->getlocale() ) }}" class="btn">{{ __('Application') }} {{ __('Send') }}</a>
         </div>
       </div>
 
@@ -20,7 +20,7 @@
 
                   <div class="search__box__left">
                       <select id="datatable_length" class="show__btn">
-                        @foreach([5] as $number)
+                        @foreach([5,10,20,25,50,75,100] as $number)
                         <option value="{{ $number }}" {{ $pagination == $number ? 'selected=selected' : '' }} >{{ $number }}</option>
                         @endforeach
                       </select>

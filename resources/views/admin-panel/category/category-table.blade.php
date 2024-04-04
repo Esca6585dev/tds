@@ -14,9 +14,9 @@
             @foreach ($categories as $category)
             <tr id="datatable">
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ $category->name_tm }}</td>
-                <td>{{ $category->name_en }}</td>
-                <td>{{ $category->name_ru }}</td>
+                @foreach (Config::get('languages') as $lang => $language)
+                <td>{{ $category->{ 'name_' . $lang } }}</td>
+                @endforeach
                 <td>
                     <a href="{{ route(Request::segment(4) . '.show', [ app()->getlocale(), $categoryType, $category->parent ? $category->parent->id : $category->id ] ) }}" class="{{ $category->parent ? 'text-warning' : 'text-primary' }}">
                         {{ $category->parent ? $category->parent->{ 'name_' . app()->getlocale() } : __('Parent Category') }}

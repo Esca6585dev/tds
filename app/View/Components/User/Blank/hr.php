@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\user\blank;
+namespace App\View\Components\User\Blank;
 
 use Illuminate\View\Component;
 

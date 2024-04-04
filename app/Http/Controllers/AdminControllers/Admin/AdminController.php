@@ -11,6 +11,7 @@ use App\Http\Requests\AdminEditRequest;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\DB;
+use Auth;
 
 class AdminController extends Controller
 {
@@ -35,7 +36,7 @@ class AdminController extends Controller
             if($request->search) {
                 $searchQuery = trim($request->query('search'));
 
-                $requestData = ['first_name', 'last_name', 'email', 'username'];
+                $requestData = Admin::fillableData();
 
                 $admins = Admin::where(function($q) use($requestData, $searchQuery) {
                                         foreach ($requestData as $field)
@@ -156,7 +157,7 @@ class AdminController extends Controller
      */
     public function destroy($lang, Admin $admin)
     {
-        $admin->delete();
+        $admin->forceDelete();
 
         return redirect()->route('admin.index', [ app()->getlocale() ])->with('success-delete', 'The resource was deleted!');
     }

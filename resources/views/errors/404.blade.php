@@ -15,13 +15,16 @@
             <div class="d-flex flex-column flex-column-fluid text-center p-10 py-lg-20">
                 <!--begin::Logo-->
                 <a href="{{ url('/') }}" class="mb-10 pt-lg-20">
-                    <img alt="img/tds-logo/tds-gold_4.webp" src="{{ asset('img/tds-logo/tds-gold_4.webp') }}" class="h-50px mb-5" />
+                    <img alt="{{ asset('img/tds-logo/tds-logo.gif') }}" src="{{ asset('img/tds-logo/tds-logo.gif') }}" class="h-100px mb-5" style="background: transparent;" />
                 </a>
                 <!--end::Logo-->
                 <!--begin::Wrapper-->
-                <div class="pt-lg-10">
+                <div>
                     <!--begin::Logo-->
-                    <h1 class="fw-bolder fs-4x text-gray-800 mb-10">{{ __('Page Not Found') }}</h1>
+                    <h1 class="fw-bolder fs-4x text-gray-800 mb-5">404</h1>
+                    <h1 class="fw-bolder fs-4x text-gray-800 mb-5">{{ __('Page Not Found') }}</h1>
+                    <h1 class="fw-bolder fs-4x text-gray-800 mb-5">Page Not Found</h1>
+                    <h1 class="fw-bolder fs-4x text-gray-800 mb-5">Страница не найдена</h1>
                     <!--end::Logo-->
                     <!--begin::Message-->
                     <div class="fw-bold fs-3 text-muted mb-15">Siziň gözleýän sahypaňyz tapylmady!</div>

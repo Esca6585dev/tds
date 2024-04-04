@@ -14,4 +14,9 @@
             'name' => 'Русский',
             'icon' => '248-russia.svg'
         ],
+
+        'tr' => [
+            'name' => 'Türkçe',
+            'icon' => '006-turkey.svg'
+        ],
     ];

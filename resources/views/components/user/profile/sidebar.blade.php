@@ -19,14 +19,14 @@
                                 </svg>
                             </span>
 
-                            <span class="hide-900">
+                            <span class="hide-900 show-900">
                                 {{ __('Main Page') }}
                             </span>
                         </li>
                     </a>
 
                     <a href="{{ route('profile', app()->getlocale() ) }}">
-                        <li class="section__profile__menu__item {{ Request::is('*/profile') ? 'active' : '' }}">
+                        <li class="section__profile__menu__item {{ Request::is('*/profile') ? 'active' : '' }} {{ Request::is('*/profile/password/change') ? 'active' : '' }}">
                             <span class="section__profile__menu__item__icon">
                                 <svg width="18px" height="18px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                     <title>{{ __('Profile') }}</title>
@@ -38,11 +38,12 @@
                                 </svg>
                             </span>
 
-                            <span class="hide-900">
+                            <span class="hide-900 show-900">
                                 {{ __('Profile') }}
                             </span>
                         </li>
                     </a>
+
                     <a href="{{ route('profile.cart', app()->getlocale() ) }}">
                         <li class="section__profile__menu__item {{ Request::is('*/profile/cart') ? 'active' : '' }}">
                             <span class="section__profile__menu__item__icon">
@@ -61,11 +62,12 @@
                                 </svg>
                             </span>
 
-                            <span class="hide-900">
+                            <span class="hide-900 show-900">
                                 {{ __('My Cart') }}
                             </span>
                         </li>
                     </a>
+
                     <a href="{{ route('profile.application', app()->getlocale() ) }}">
                         <li class="section__profile__menu__item {{ Request::is('*/profile/application*') ? 'active' : '' }}">
                             <span class="section__profile__menu__item__icon">
@@ -82,30 +84,33 @@
                                 </svg>
                             </span>
 
-                            <span class="hide-900">
+                            <span class="hide-900 show-900">
                                 {{ __('Applications') }}
                             </span>
                         </li>
                     </a>
+
+                    @if (Auth::user()->roles->pluck('name')[0] != 'raýat')
                     <a href="{{ route('profile.letterhead', app()->getlocale() ) }}">
                         <li class="section__profile__menu__item {{ Request::is('*/profile/letterhead') ? 'active' : '' }}">
                             <span class="section__profile__menu__item__icon">
-                                <img src="{{ asset('assets/sites-seeder/gerb.png') }}" alt="{{ asset('assets/sites-seeder/gerb.png') }}" width="18px">
+                                <img src="{{ asset(Auth::user()->letterhead->image ?? 'assets/sites-seeder/gerb.png') }}" alt="{{ __('We request that you change the company logo!') }}" width="18px">
                             </span>
 
-                            <span class="hide-900">
+                            <span class="hide-900 show-900">
                                 {{ __('Letterhead') }}
                             </span>
                         </li>
                     </a>
-                </ul>
+                    @endif
 
-                <br>
+                </ul>
 
             </div>
 
             <div class="section__profile__left__down">
                 <ul class="section__profile__menu">
+
                     <a onclick="showToast()">
                         <li class="section__profile__menu__item">
                             <span class="section__profile__menu__item__icon">
@@ -120,7 +125,7 @@
                                 </svg>
                             </span>
 
-                            <span class="hide-900">
+                            <span class="hide-900 show-900">
                                 {{ __('Logout') }}
                             </span>
                         </li>
@@ -131,6 +136,7 @@
                         </form>
 
                     </a>
+                    
                 </ul>
 
                 <br>

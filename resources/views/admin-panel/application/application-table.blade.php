@@ -5,7 +5,6 @@
                 <th>ID</th>
                 <th>{{ __('First Name') }}</th>
                 <th>{{ __('Last Name') }}</th>
-                <th>{{ __('Email') }}</th>
                 <th>{{ __('Application') }} {{ __('Phone number') }}</th>
                 <th>{{ __('User') }} {{ __('Phone number') }}</th>
                 <th>{{ __('IP Address') }}</th>
@@ -22,7 +21,6 @@
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $application->user->first_name }}</td>
                 <td>{{ $application->user->last_name }}</td>
-                <td>{{ $application->user->email }}</td>
                 <td>{{ $application->filterNumber($application->phone_number) }}</td>
                 <td>{{ $application->user->phone_number }}</td>
                 <td>{{ $application->ip_address }}</td>

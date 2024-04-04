@@ -47,4 +47,9 @@ class Admin extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected function fillableData()
+    {
+        return $this->fillable;
+    }
 }

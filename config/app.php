@@ -86,6 +86,7 @@ return [
         'tm',
         'en',
         'ru',
+        'tr',
     ],
 
     /*
@@ -118,6 +119,7 @@ return [
         'tm' => 'tk_TM',
         'en' => 'en_US',
         'ru' => 'ru_RU',
+        'tr' => 'tr_TR',
     ],
 
     /*
@@ -179,6 +181,7 @@ return [
          */
 
         Spatie\Permission\PermissionServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -246,6 +249,7 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'Carbon' => Carbon\Carbon::class,
         'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];

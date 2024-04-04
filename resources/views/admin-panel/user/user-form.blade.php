@@ -333,7 +333,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-6">
+                                                    <div class="col-4">
                                                         <div class="form-group">
                                                             <label>{{ __('Password') }}</label>
 
@@ -353,7 +353,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-6">
+                                                    <div class="col-4">
                                                         <div class="form-group">
                                                             <label>{{ __('Confirm Password') }}</label>
 
@@ -370,6 +370,34 @@
                                                                 </div>
                                                             </div>
                                                             @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    
+                                                    <div class="col-4">
+                                                        <div class="form-group">
+                                                            <label>{{ __('Emblem') }} {{ __('or') }} {{ __('Logo') }}</label>
+
+                                                            <input type="file"
+                                                                class="form-control @error('image') is-invalid @enderror"
+                                                                name="image" />
+
+                                                            @error('image')
+                                                            <div class="fv-plugins-message-container invalid-feedback">
+                                                                <div data-field="image" data-validator="notEmpty">
+                                                                    {{ $message }}
+                                                                </div>
+                                                            </div>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="section__container__body mx-4 mb-10">
+                                                        <div class="section__container__word">
+
+                                                            <div class="section__sample">
+                                                                <x-user.blank.company :id="$user->id" />
+                                                            </div>
                                                         </div>
                                                     </div>
 

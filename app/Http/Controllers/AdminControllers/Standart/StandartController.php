@@ -32,7 +32,7 @@ class StandartController extends Controller
             if($request->search) {
                 $searchQuery = trim($request->query('search'));
 
-                $requestData = ['number', 'name_tm', 'name_en', 'name_ru'];
+                $requestData = Standart::fillableData();
 
                 $standarts = Standart::where(function($q) use($requestData, $searchQuery) {
                                         foreach ($requestData as $field)
@@ -74,6 +74,7 @@ class StandartController extends Controller
             $standart->name_tm = ucfirst($request->name_tm);
             $standart->name_en = ucfirst($request->name_en);
             $standart->name_ru = ucfirst($request->name_ru);
+            $standart->name_tr = ucfirst($request->name_tr);
 
             $standart->save();
 
@@ -118,6 +119,7 @@ class StandartController extends Controller
             $standart->name_tm = ucfirst($request->name_tm);
             $standart->name_en = ucfirst($request->name_en);
             $standart->name_ru = ucfirst($request->name_ru);
+            $standart->name_tr = ucfirst($request->name_tr);
 
             $standart->update();
 

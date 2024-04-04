@@ -16,9 +16,9 @@
             @foreach ($news as $row)
             <tr id="datatable">
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ $row->name_tm }}</td>
-                <td>{{ $row->name_en }}</td>
-                <td>{{ $row->name_ru }}</td>
+                @foreach (Config::get('languages') as $lang => $language)
+                <td>{{ $row->{ 'name_' . $lang } }}</td>
+                @endforeach
                 <td>
                     @if($row->category_id == 1)
                     <span class="badge badge-success">{{ __('News') }}</span>

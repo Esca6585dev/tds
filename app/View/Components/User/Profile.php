@@ -26,7 +26,7 @@ class Profile extends Component
     public function render()
     {
         $categories = Category::where('category_id', null)->get();
-        $roles = Role::where('guard_name', 'web')->pluck('name','name')->all();
+        $roles = Role::where('guard_name', 'web')->pluck('name', 'name')->all();
 
         return view('components.user.profile', compact('categories', 'roles'));
     }

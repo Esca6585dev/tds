@@ -4,12 +4,14 @@
     <section class="section__service__header">
         <img src="{{ asset('img/tds-logo/tds-logo.gif') }}" alt="{{ asset('img/tds-logo/tds-logo.gif') }}" class="section__service__logo" width="100px">
             
-        <p>{{ $section->{ 'name_' . app()->getlocale() } }}</p>
+        <a href="{{ route('digital.services.category', [ app()->getlocale(), $section->id, Str::slug($section->{ 'name_' . app()->getlocale() }) ]) }}" class="section__service__header__name">
+          {{ $section->{ 'name_' . app()->getlocale() } }}
+        </a>
     </section>
 
         <div class="section__service">
             @foreach ($section->sections as $childrenSection)
-            <a href="{{ route('fill-application', [ app()->getlocale(), $childrenSection->id, Str::slug($childrenSection->{ 'name_' . app()->getlocale() }) ]) }}" class="section__service__row {{ ($childrenSection->id == 4 || $childrenSection->id == 6) ? 'section__service__row__long' : '' }} bg-goldenrod-1">
+            <a href="{{ route('digital.services.category', [ app()->getlocale(), $childrenSection->id, Str::slug($childrenSection->{ 'name_' . app()->getlocale() }) ]) }}" class="section__service__row {{ ($childrenSection->id == 4 || $childrenSection->id == 6) ? 'section__service__row__long' : '' }} bg-goldenrod-1">
                 <div class="section__service__name">
                   <img src="{{ asset('img/tds-logo/tds-logo.gif') }}" alt="{{ asset('img/tds-logo/tds-logo.gif') }}" class="section__service__logo" width="100px">
                   

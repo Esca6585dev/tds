@@ -30,12 +30,12 @@ class CartController extends Controller
             if($request->search) {
                 $searchQuery = trim($request->query('search'));
                 
-                $requestData = ['ip_address', 'number', 'name_tm', 'name_en', 'name_ru', 'first_name', 'last_name', 'email', 'phone_number', 'address'];
+                $requestData = Cart::fillableData();
     
-                $carts = Cart::with(['standart', 'user'], function($q) use($requestData, $searchQuery) {
+                $carts = Cart::where(function($q) use($requestData, $searchQuery) {
                                         foreach ($requestData as $field)
                                         $q->orWhere($field, 'like', "%{$searchQuery}%");
-                                })->paginate($pagination);
+                                })->withTrashed()->paginate($pagination);
             }
             
             return view('admin-panel.cart.cart-table', compact('carts', 'pagination'))->render();

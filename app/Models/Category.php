@@ -13,6 +13,7 @@ class Category extends Model
         'name_tm',
         'name_en',
         'name_ru',
+        'name_tr',
         'category_id',
     ];
 
@@ -34,5 +35,10 @@ class Category extends Model
     public function childrenCategories()
     {
         return $this->hasMany(Category::class)->with('categories');
+    }
+
+    protected function fillableData()
+    {
+        return $this->fillable;
     }
 }

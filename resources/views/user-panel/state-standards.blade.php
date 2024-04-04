@@ -16,9 +16,9 @@
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $standart->number }}</td>
-                <td>{{ $standart->name_tm }}</td>
-                <td>{{ $standart->name_en }}</td>
-                <td>{{ $standart->name_ru }}</td>
+                @foreach (Config::get('languages') as $lang => $language)
+                <td>{{ $standart->{ 'name_' . $lang } }}</td>
+                @endforeach
                 @auth
                 <td>
                     <span class="btn__cart fa {{ $standart->cart ? 'fa-close color-gold' : 'fa-plus' }}" id="active__{{ $standart->id }}" onclick="addToCartApplication({{ $standart->id }}, {{ Auth::check() }})"></span>

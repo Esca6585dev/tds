@@ -37,5 +37,17 @@ class SendApplicationEmail
             $message->subject('Salam size ' . $user->first_name . ' ' . $user->last_name . ' arza ugratdy!');
             $message->to(env('MAIL_RECEIVER_USERNAME'));
         });
+
+        Mail::send('emails.application-tds', ['application' => $application, 'user' => $user], function ($message) use ($application, $user) {
+            $message->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME') . ' ' . env('APP_DOMAIN'));
+            $message->subject('Salam size ' . $user->first_name . ' ' . $user->last_name . ' arza ugratdy!');
+            $message->to(env('MAIL_TDS_USERNAME'));
+        });
+
+        Mail::send('emails.application-tds', ['application' => $application, 'user' => $user], function ($message) use ($application, $user) {
+            $message->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME') . ' ' . env('APP_DOMAIN'));
+            $message->subject('Salam siziň arzaňyz kabul edildi!');
+            $message->to($user->email);
+        });
     }
 }

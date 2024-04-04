@@ -104,6 +104,12 @@
 
           <div class="social__media">
             <ul>
+              <a href="https://tmstart.me/Esca6585" target="_blank" class="social__media__link" title="{{ __('Tm Start') }} Esca6585">
+                <img class="image-gray w-0-8em" src="{{ asset('metronic-template/v8/assets/media/svg/brand-logos/tmstart-logo.png') }}" alt="{{ asset('metronic-template/v8/assets/media/svg/brand-logos/tmstart-logo.png') }}" >
+              </a>
+              <a href="https://tmstart.me/turkmenstandartlary" target="_blank" class="social__media__link" title="{{ __('Tm Start') }} Türkmenstandartlary">
+                <img class="image-gray w-0-8em" src="{{ asset('metronic-template/v8/assets/media/svg/brand-logos/tmstart-logo.png') }}" alt="{{ asset('metronic-template/v8/assets/media/svg/brand-logos/tmstart-logo.png') }}" >
+              </a>
               <a href="https://t.me/Esca6585" target="_blank" class="social__media__link" title="{{ __('Telegram') }}">
                   <img class="image-gray w-0-8em" src="{{ asset('metronic-template/v8/assets/media/svg/brand-logos/telegram.svg') }}" alt="{{ asset('metronic-template/v8/assets/media/svg/brand-logos/telegram.svg') }}" >
               </a>
@@ -119,7 +125,7 @@
               <a href="https://www.instagram.com" target="_blank" class="social__media__link" title="{{ __('Instagram') }}">
                   <img class="image-gray w-0-8em" src="{{ asset('metronic-template/v8/assets/media/svg/brand-logos/instagram-2-1.svg') }}" alt="{{ asset('metronic-template/v8/assets/media/svg/brand-logos/instagram-2-1.svg') }}" >
               </a>
-              <a href="https://www.youtube.com/@escameredoff3094" target="_blank" class="social__media__link" title="{{ __('Youtube') }}">
+              <a href="https://www.youtube.com/@Esca6585" target="_blank" class="social__media__link" title="{{ __('Youtube') }}">
                   <img class="image-gray w-0-8em" src="{{ asset('metronic-template/v8/assets/media/svg/brand-logos/youtube-3.svg') }}" alt="{{ asset('metronic-template/v8/assets/media/svg/brand-logos/youtube-3.svg') }}" >
               </a>
               <a href="https://www.google.com/search?q=TÜRKMENSTANDARTLARY" target="_blank" class="social__media__link"  title="{{ __('Google') }}">

@@ -13,7 +13,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        //seed articles table
         $this->call([
             RolesAndPermissionsSeeder::class,
             AdminSeeder::class,

@@ -34,7 +34,7 @@ class TextController extends Controller
             if($request->search) {
                 $searchQuery = trim($request->query('search'));
                 
-                $requestData = ['name_tm', 'name_en', 'name_ru'];
+                $requestData = Text::fillableData();
     
                 $texts = Text::where(function($q) use($requestData, $searchQuery) {
                                         foreach ($requestData as $field)
@@ -73,6 +73,7 @@ class TextController extends Controller
         $text->name_tm = $request->name_tm;
         $text->name_en = $request->name_en;
         $text->name_ru = $request->name_ru;
+        $text->name_tr = $request->name_tr;
         $text->category_id = $request->category_id;
         
         $text->save();
@@ -116,6 +117,7 @@ class TextController extends Controller
         $text->name_tm = $request->name_tm;
         $text->name_en = $request->name_en;
         $text->name_ru = $request->name_ru;
+        $text->name_tr = $request->name_tr;
         $text->category_id = $request->category_id;
         
         $text->update();

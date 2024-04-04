@@ -16,8 +16,6 @@
 
     <x-user.alert.all/>
     
-    <x-user.snowing />
-
     <x-user.header />
 
     <x-user.profile.sidebar />

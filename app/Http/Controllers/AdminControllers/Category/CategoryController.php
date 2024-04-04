@@ -39,7 +39,7 @@ class CategoryController extends Controller
             if($request->search) {
                 $searchQuery = trim($request->query('search'));
                 
-                $requestData = ['name_tm', 'name_en', 'name_ru'];
+                $requestData = Category::fillableData();
     
                 $categories = Category::where(function($q) use($requestData, $searchQuery) {
                                         foreach ($requestData as $field)
@@ -78,6 +78,7 @@ class CategoryController extends Controller
         $category->name_tm = $request->name_tm;
         $category->name_en = $request->name_en;
         $category->name_ru = $request->name_ru;
+        $category->name_tr = $request->name_tr;
         $category->category_id = $request->category_id;
         
         $category->save();
@@ -121,6 +122,7 @@ class CategoryController extends Controller
         $category->name_tm = $request->name_tm;
         $category->name_en = $request->name_en;
         $category->name_ru = $request->name_ru;
+        $category->name_tr = $request->name_tr;
         $category->category_id = $request->category_id;
         
         $category->update();

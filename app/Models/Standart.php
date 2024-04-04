@@ -10,15 +10,21 @@ class Standart extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = [
+    public $fillable = [
         'number',
         'name_tm',
         'name_en',
         'name_ru',
+        'name_tr',
     ];
 
     public function cart()
     {
         return $this->hasOne(Cart::class,'standart_id', 'id')->where('user_id', auth()->user()->id);
+    }
+
+    protected function fillableData()
+    {
+        return $this->fillable;
     }
 }

@@ -150,17 +150,20 @@ function redirect(href) {
 }
 
 function addToCartApplication(id, AuthCheck){
+    var htmlElement = document.getElementsByTagName("html")[0];
+    var lang = htmlElement.getAttribute("lang");
+    
     if(!AuthCheck){
         $('.warning').css('display','block');
         alertFade();
-        setTimeout(redirect("/tm/login"), 2000);
+        setTimeout(redirect( '/' + lang + '/login'), 2000);
     } else {
         var path = window.location.origin;
-        var count = $("#session__count").html();
+        var count = $('#session__count').html();
         var token = '_token=' + $('meta[name="csrf-token"]').attr('content');
 
         $.ajax({
-            url: path + '/tm/add-to-cart-application/' + id,
+            url: path + '/' + lang + '/add-to-cart-application/' + id,
             type: 'POST',
             data: token,
             success: function (data) {
@@ -185,6 +188,7 @@ function addToCartApplication(id, AuthCheck){
                 }
             },
             error: function(err) {
+                console.log(err);
             }
         });
     }
@@ -196,7 +200,7 @@ function removeFromCartApplication(id){
     var token = '_token=' + $('meta[name="csrf-token"]').attr('content');
 
     $.ajax({
-        url: path + '/tm/add-to-cart-application/' + id,
+        url: path + '/' + lang + '/add-to-cart-application/' + id,
         type: 'POST',
         data: token,
         success: function (data) {
@@ -269,10 +273,13 @@ function inputDisable(){
             $(this).prop('disabled', true);
         }
     });
-    $("#div__buttons").addClass('hide');
+    $("#div__buttons").toggleClass('hide');
 }
 
 function saveData(){
+    var htmlElement = document.getElementsByTagName("html")[0];
+    var lang = htmlElement.getAttribute("lang");
+    
     var path = window.location.origin;
     var token = '_token=' + $('meta[name="csrf-token"]').attr('content');
     var formData = '';
@@ -288,7 +295,7 @@ function saveData(){
     formData = token + formData;
 
     $.ajax({
-        url: path + '/tm/profile/edit',
+        url: path + '/' + lang + '/profile/edit',
         type: 'POST',
         data: formData,
         success: function(success) {
@@ -304,6 +311,14 @@ function saveData(){
 function redirectTo(slug) {
     let location = window.location.pathname;
     let lang = location.slice(0, 3);
+    lang += '/';
+
+    window.location.href = window.location.origin + lang + slug;
+}
+
+function redirectToSection(slug) {
+    let location = window.location.pathname;
+    let lang = location.slice(0, 20);
     lang += '/';
 
     window.location.href = window.location.origin + lang + slug;
@@ -325,22 +340,23 @@ function closeToast(){
 toggle between hiding and showing the dropdown content */
 function dropDown(id) {
     document.getElementById("myDropdown_" + id).classList.toggle("show");
-    document.getElementById("fa_dropdown_" + id).classList.toggle("fa-caret-up");
+    document.getElementById("fa_dropdown_" + id).classList.toggle("fa-angle-down");
+    document.getElementById("fa_dropdown_" + id).classList.toggle("fa-angle-up");
 }
 
 // Close the dropdown if the user clicks outside of it
 window.onclick = function(event) {
     if (!event.target.matches('.dropbtn')) {
         var dropdowns = document.getElementsByClassName("dropdown-content");
-        var icons = document.getElementsByClassName("fa-caret-down");
+        var icons = document.getElementsByClassName("fa-angle-down");
 
         for (var i = 0; i < dropdowns.length; i++) {
             var openDropdown = dropdowns[i];
             var upIcon = icons[i];
 
-            if (openDropdown.classList.contains('show') && upIcon.classList.contains('fa-caret-up')) {
+            if (openDropdown.classList.contains('show') && upIcon.classList.contains('fa-angle-up')) {
                 openDropdown.classList.remove('show');
-                upIcon.classList.remove("fa-caret-up");
+                upIcon.classList.remove("fa-angle-up");
             }
 
         }
@@ -369,7 +385,6 @@ function topFunction() {
 
 function changeBolum(event) {
     var htmlElement = document.getElementsByTagName("html")[0];
-
     var lang = htmlElement.getAttribute("lang");
 
     var parent_id = event.target.value;
@@ -413,9 +428,8 @@ function changeBolum(event) {
 
 function changeDescription(event) {
     var htmlElement = document.getElementsByTagName("html")[0];
-
     var lang = htmlElement.getAttribute("lang");
-
+    
     var id = event.target.value;
     var api = '/api/sections/description';
     var username = 'user@gmail.com';
@@ -456,10 +470,48 @@ function changeDescription(event) {
     });
 }
 
+function changeDescriptionRedirectUrl(event) {
+    var htmlElement = document.getElementsByTagName("html")[0];
+    var lang = htmlElement.getAttribute("lang");
+    
+    var id = event.target.value;
+    var api = '/api/sections/url';
+    var username = 'user@gmail.com';
+    var password = 'password';
+
+    $.ajax({  
+        url: window.location.origin + api,
+        username : username,
+        password : password,
+        data: { id: id },
+        type: 'POST',
+        contentType: 'application/x-www-form-urlencoded',
+        dataType: "text",
+        xhrFields: 
+        {
+            withCredentials: true
+        },
+        beforeSend: function (xhr) { 
+            xhr.setRequestHeader('Authorization', 'Basic ' + btoa(username + ":" + password));             
+        },
+        success: function (data) {
+            const obj = JSON.parse(data);
+
+            if(lang == 'tm'){
+                window.location.replace(window.location.origin + '/' + lang + '/profile/application/create/' + id + '/' + obj.name_tm);
+            } else if(lang == 'en'){
+                window.location.replace(window.location.origin + '/' + lang + '/profile/application/create/' + id + '/' + obj.name_en);
+            } else if(lang == 'ru'){
+                window.location.replace(window.location.origin + '/' + lang + '/profile/application/create/' + id + '/' + obj.name_ru);
+            }
+        }
+    });
+}
+
 function redirectToRoute(event) {
     var htmlElement = document.getElementsByTagName("html")[0];
     var lang = htmlElement.getAttribute("lang");
-
+    
     var id = event.target.value;
     var api = '/api/sections/url';
     var username = 'user@gmail.com';
@@ -497,6 +549,7 @@ function redirectToRoute(event) {
 function showModal() {
     var modal = document.getElementById("descModal");
     modal.classList.toggle("hide");
+    scrollTop();
 }
 
 function copyText() {
@@ -506,4 +559,11 @@ function copyText() {
 
     // Alert the copied text
     alert("Copied the text: " + skypeId);
+}
+
+function changeImage(){
+    var companyLogo = document.getElementById("companyLogo");
+    
+    console.log(companyLogo);
+    console.log("salam");
 }

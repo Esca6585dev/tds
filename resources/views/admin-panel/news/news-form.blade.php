@@ -256,8 +256,7 @@
                                                         <div class="form-group">
                                                             <label>{{ __('View') }}</label>
 
-                                                            <input type="text" class="form-control @error('view') is-invalid @enderror" name="view" value="{{ $news->view }} {{ request()->segment(count(request()->segments())) == 'create' ? old('view') : 0 }}" >
-                                                            {{ request()->segment(count(request()->segments())) }}
+                                                            <input type="text" class="form-control @error('view') is-invalid @enderror" name="view" value="{{ $news->view }}{{ request()->segment(count(request()->segments())) == 'create' ? old('view') : 0 }}">
 
                                                             @error('view')
                                                             <div class="fv-plugins-message-container invalid-feedback">

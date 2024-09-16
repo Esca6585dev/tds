@@ -18,6 +18,7 @@
 
         .document {
             text-align: center;
+            margin-top: 20px;
         }
 
         iframe {
@@ -56,6 +57,33 @@
             justify-content: space-around;
         }
 
+        table {
+            width:100%;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+        }
+
+        #t01 tr:nth-child(even) {
+            background-color: #eee;
+        }
+
+        #t01 tr:nth-child(odd) {
+            background-color: #fff;
+        }
+
+        #t01 th {
+            background-color: rgb(218, 165, 32, .9);
+            color: #000;
+        }
+
     </style>
 
 </head>
@@ -75,14 +103,57 @@
         </div>
 
         <div class="document">
-            <iframe src="https://docs.google.com/gview?url=https://tds.gov.tm/{{ $message->file }}&embedded=true" frameborder="1"></iframe>
+            <div>
+                <table id="t01">
+                    <thead>
+                        <tr>
+                            <th>{{ __('Username') }}</th>
+                            <th>{{ __('Phone number') }}</th>
+                            <th>{{ __('Email Address') }}</th>
+                            <th>{{ __('Message') }}</th>
+                            <th>{{ __('Created time') }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ $data->username }}</td>
+                            <td>{{ $data->phone_number }}</td>
+                            <td>{{ $data->email }}</td>
+                            <td>{{ $data->message }}</td>
+                            <td>{{ \Carbon::parse($data->created_at)->locale(config('app.faker_locales.' . app()->getlocale() ))->isoFormat('LLLL') }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
-        <div class="footer">
-        <a class="btn" href="{{ env('APP_URL') }}/{{ $message->file }}">{{ __('Download') }}</a>
-
-            <a class="btn" target="_blank" href="https://docs.google.com/gview?url=https://tds.gov.tm/{{ $message->file }}&embedded=true">Google Word Aç</a>
+        <div class="document">
+            <div>
+                <table id="t01">
+                    <thead>
+                        <tr>
+                            <th>{{ __('First Name') }}</th>
+                            <th>{{ __('Last Name') }}</th>
+                            <th>{{ __('Email Address') }}</th>
+                            <th>{{ __('Phone number') }}</th>
+                            <th>{{ __('Address') }}</th>
+                            <th>{{ __('Company name') }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ $user->first_name }}</td>
+                            <td>{{ $user->last_name }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td>{{ $user->phone_number }}</td>
+                            <td>{{ $user->address }}</td>
+                            <td>{{ $user->company_name }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
+        
     </div>
 </body>
 </html>

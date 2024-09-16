@@ -17,9 +17,13 @@ use App\Models\Message;
 use App\Models\Section;
 use Spatie\Permission\Models\Role;
 use App\Events\ApplicationRegistered;
+use App\Events\MessageSend;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\AddToNameTrStandart;
 use Stevebauman\Location\Facades\Location;
+use SapientPro\ImageComparatorLaravel\Facades\Comparator;
+use SapientPro\ImageComparator\Strategy\DifferenceHashStrategy;
+use SapientPro\ImageComparator\ImageComparator;
 use Auth;
 use Str;
 use File;
@@ -27,22 +31,9 @@ use QrCode;
 
 class UserController extends Controller
 {
-    public function export()
+    public function goToMainPage()
     {
-        return Excel::download(new \App\Exports\UsersExport, 'users.xlsx');
-    }
-    
-    public function goToMainPage(Request $request)
-    {
-        $location = Location::get($request->ip());
-
-        if($location){
-            if (in_array(Str::lower($location->countryCode), config('app.locales'))) {
-                return redirect()->route('main-page', Str::lower($location->countryCode));
-            }
-        }
-
-        return redirect()->route('main-page', 'en');
+        return view('user-panel.main-page');
     }
 
     public function mainPage()
@@ -424,7 +415,7 @@ class UserController extends Controller
                 $qrCode = QrCode::format('png')->size(75)->generate($filePath . $code_number . '/docx');
 
                 $section->addImage($qrCode);
-                
+
                 $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
 
                 $user_name = Auth::user()->first_name . "_" . Auth::user()->last_name . "_" . Auth::user()->id;
@@ -1003,8 +994,8 @@ class UserController extends Controller
         $request->validate([
             'username' => ['required', 'min:3', 'max:50'],
             'phone_number' => ['required', 'string', 'min:3', 'max:50'],
-            'email' => ['required', 'string', 'email', 'max:50', 'unique:users', 'email_checker'],
-            'message' => ['required', 'min:10', 'max:100'],
+            'email' => ['required', 'string', 'email', 'max:50', 'email_checker'],
+            'message' => ['required'],
         ]);
 
         $message = new Message;

@@ -190,14 +190,14 @@ class HomeController extends Controller
 
         Letterhead::findOrCreate($user->id, [
             'user_id' => $user->id,
-            'company_name_tm' => $request->company_name_tm, 
-            'company_name_en' => $request->company_name_en, 
-            'address_tm' => $request->address_tm,
-            'address_en' => $request->address_en,
-            'phone_number_tm' => $request->phone_number_tm,
-            'phone_number_en' => $request->phone_number_en,
-            'email_tm' => $request->email_tm,
-            'email_en' => $request->email_en,
+            'company_name_tm' => $request->company_name_tm ?? 'Edaranyň ady', 
+            'company_name_en' => $request->company_name_en ?? 'Edaranyň ady',
+            'address_tm' => $request->address_tm ?? 'Salgysy',
+            'address_en' => $request->address_en ?? 'Salgysy',
+            'phone_number_tm' => $request->phone_number_tm ?? 'Telefon belgiňiz',
+            'phone_number_en' => $request->phone_number_en ?? 'Telefon belgiňiz',
+            'email_tm' => $request->email_tm ?? 'Email',
+            'email_en' => $request->email_en ?? 'Email',
             'image' => $originalLetterhead,
         ]);
     }

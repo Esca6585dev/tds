@@ -8,6 +8,8 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 use Illuminate\Support\Facades\Event;
 use App\Events\ApplicationRegistered;
 use App\Listeners\SendApplicationEmail;
+use App\Events\MessageSend;
+use App\Listeners\SendMessageEmail;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -22,6 +24,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         ApplicationRegistered::class => [
             SendApplicationEmail::class,
+        ],
+        MessageSend::class => [
+            SendMessageEmail::class,
         ],
     ];
 

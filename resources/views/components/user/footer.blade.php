@@ -129,7 +129,7 @@
                 <div class="footer__menu__title">
                     <ul>
                         <li>(+993 12) <a href="tel:95-73-55">95-73-55,</a><br><a href="tel:95-73-56">95-73-56</a></li>
-                        <li><a href="mailto:tds@sanly.tm">tds@sanly.tm</a></li>
+                        <li><a href="mailto:info@tds.gov.tm">info@tds.gov.tm</a></li>
                         <li><a href="{{ route('contact-us', app()->getlocale() ) }}">{{ __('Contact Us') }}</a></li>
                     </ul>
                 </div>
@@ -176,7 +176,7 @@
         <a href="{{ route('contact-us', app()->getlocale() ) }}" class="social__media__link" title="{{ __('Contact Us') }}">
             <img class="image-gray-reverse w-1-5em" src="{{ asset('metronic-template/v7/assets/media/icons/duotone/Communication/Chat6.svg') }}" alt="{{ asset('metronic-template/v7/assets/media/icons/duotone/Communication/Chat6.svg') }}" >
         </a>
-        <a href="mailto:tds@sanly.tm" class="social__media__link" title="tds@sanly.tm">
+        <a href="mailto:info@tds.gov.tm" class="social__media__link" title="info@tds.gov.tm">
             <img class="image-gray-reverse w-1-5em" src="{{ asset('metronic-template/v7/assets/media/svg/icons/Communication/Mail-at.svg') }}" alt="{{ asset('metronic-template/v7/assets/media/svg/icons/Communication/Mail-at.svg') }}" >
         </a>
         <a href="https://www.google.com/maps/place/%D0%93%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F+%D0%B3%D0%BE%D1%81%D1%83%D0%B4%D0%B0%D1%80%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F+%D1%81%D0%BB%D1%83%D0%B6%D0%B1%D0%B0+%C2%AB%D0%A2%D1%83%D1%80%D0%BA%D0%BC%D0%B5%D0%BD%D1%81%D1%82%D0%B0%D0%BD%D0%B4%D0%B0%D1%80%D1%82%D0%BB%D0%B0%D1%80%D1%8B%C2%BB/@37.9135517,58.3580199,1779m/data=!3m1!1e3!4m6!3m5!1s0x3f7003eb50e7a8a1:0xaf4b5fefe2c00497!8m2!3d37.9135405!4d58.3583415!16s%2Fg%2F11h59ypsl7?entry=ttu" target="_blank" class="social__media__link" title="google map" >

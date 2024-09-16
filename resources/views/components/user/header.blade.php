@@ -66,6 +66,9 @@
               </div>
             </div>
           </li>
+          <li class="hide">
+            <a href="{{ route('contact-us', app()->getlocale() ) }}">{{ __('Contact Us') }}</a>
+          </li>
           @if(Auth::check())
           <li>
             <a href="{{ route('profile', app()->getlocale() ) }}">{{ __('Profile') }}</a>

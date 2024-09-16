@@ -242,7 +242,7 @@ ul li {
 .header__container {
   background-color: white;
   border-bottom: 1px solid #ccc;
-  position: -webkit-sticky; /* Safari */
+  position: -webkit-sticky;
   position: sticky;
   top: 0;
   z-index: 15;
@@ -310,17 +310,9 @@ ul li {
 }
 
 .section__wallpaper__container {
-  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-#dowlet__nyshany {
-  position: absolute;
-  top: 7%;
-  left: 18%;
-  width: 150px;
 }
 
 #section__wallpaper {
@@ -1352,7 +1344,7 @@ a.button {
 .section__container__tab__image img {
   padding-top: 10px;
   height: 100%;
-  max-width: 250px;
+  max-width: auto;
   display: block;
   margin: auto;
 }

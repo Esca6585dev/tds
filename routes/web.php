@@ -12,11 +12,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('info', fn () => phpinfo());
-
-Route::get('/export',[App\Http\Controllers\UserControllers\UserController::class, 'export'])->name('export');
-
-Route::get('/',[App\Http\Controllers\UserControllers\UserController::class, 'goToMainPage'])->name('goToMainPage');
+Route::get('/', [App\Http\Controllers\UserControllers\UserController::class, 'goToMainPage'])->name('goToMainPage');
 
 Route::get('/login', function(){
     return redirect()->route('login', app()->getlocale());
@@ -30,6 +26,17 @@ Route::group([
     'prefix' => '{locale}',
     'where' => ['locale' => '[a-z]{2}'],
 ], function () {
+
+    // Route::get('/demiryol', [App\Http\Controllers\FrontControllers\FrontController::class, 'index'])->name('main-page-demiryol');
+
+    // Route::post('/demiryol/outbound', [App\Http\Controllers\FrontControllers\FrontController::class, 'outbound'])->name('outbound');
+
+    // Route::post('/demiryol/outbound/check', [App\Http\Controllers\FrontControllers\FrontController::class, 'check'])->name('check');
+
+    // Route::get('/demiryol/check/ticket', [App\Http\Controllers\FrontControllers\FrontController::class, 'checkTicket'])->name('check-ticket');
+
+    // Route::post('/demiryol/buy/ticket', [App\Http\Controllers\FrontControllers\FrontController::class, 'buyTicket'])->name('buy-ticket');
+
 
     Route::get('/e-sign', [App\Http\Controllers\UserControllers\UserController::class, 'eSign'])->name('e-sign')->middleware(['auth','verified','require_phone_number']);
 

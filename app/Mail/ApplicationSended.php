@@ -18,9 +18,16 @@ class ApplicationSended extends Mailable
      *
      * @return void
      */
-    public function __construct()
+
+    public $application, $user, $section, $parent_section, $text;
+
+    public function __construct($application, $user, $section, $parent_section, $text)
     {
-        //
+        $this->application = $application;
+        $this->user = $user;
+        $this->section = $section;
+        $this->parent_section = $parent_section;
+        $this->text = $text;
     }
 
     /**
@@ -31,7 +38,7 @@ class ApplicationSended extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Application Sended',
+            subject: $this->text,
         );
     }
 
@@ -54,6 +61,6 @@ class ApplicationSended extends Mailable
      */
     public function attachments()
     {
-        return [];
+        return [$this->application->file];
     }
 }

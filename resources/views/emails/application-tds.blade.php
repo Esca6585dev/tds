@@ -18,6 +18,7 @@
 
         .document {
             text-align: center;
+            margin-top: 20px;
         }
 
         iframe {
@@ -54,6 +55,34 @@
         .footer {
             display: flex;
             justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        table {
+            width:100%;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+        }
+
+        #t01 tr:nth-child(even) {
+            background-color: #eee;
+        }
+
+        #t01 tr:nth-child(odd) {
+            background-color: #fff;
+        }
+        
+        #t01 th {
+            background-color: rgb(218, 165, 32, .9);
+            color: #000;
         }
 
     </style>
@@ -78,10 +107,58 @@
             <iframe src="https://docs.google.com/gview?url=https://tds.gov.tm/{{ $application->file }}&embedded=true" frameborder="1"></iframe>
         </div>
 
-        <div class="footer">
-            <a class="btn" href="{{ env('APP_URL') }}/{{ $application->file }}">{{ __('Download') }}</a>
+        <div class="document">
+            <div>
+                <table id="t01">
+                    <thead>
+                        <tr>
+                            <th>{{ __('First Name') }}</th>
+                            <th>{{ __('Last Name') }}</th>
+                            <th>{{ __('Email Address') }}</th>
+                            <th>{{ __('Phone number') }}</th>
+                            <th>{{ __('Address') }}</th>
+                            <th>{{ __('Company name') }}</th>
+                            <th>{{ __('IP Address') }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ $user->first_name }}</td>
+                            <td>{{ $user->last_name }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td>{{ $user->phone_number }}</td>
+                            <td>{{ $user->address }}</td>
+                            <td>{{ $user->company_name }}</td>
+                            <td>{{ $application->ip_address }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
-            <a class="btn" target="_blank" href="https://docs.google.com/gview?url=https://tds.gov.tm/{{ $application->file }}&embedded=true">Google Word Aç</a>
+        <div class="document">
+            <div>
+                <table id="t01">
+                    <thead>
+                        <tr>
+                            <th>{{ __('Parent Section') }}</th>
+                            <th>{{ __('Sub Section') }}</th>
+                            <th>{{ __('Download') }}</th>
+                            <th>{{ __('Created time') }}</th>
+                            <th>Google Word Aç</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ $parent_section->name_tm }}</td>
+                            <td>{{ $section->name_tm }}</td>
+                            <td>{{ \Carbon::parse($application->created_at)->locale(config('app.faker_locales.' . app()->getlocale() ))->isoFormat('LLLL') }}</td>
+                            <td><a class="btn" href="{{ env('APP_URL') }}/{{ $application->file }}">{{ __('Download') }}</a></td>
+                            <td><a class="btn" target="_blank" href="https://docs.google.com/gview?url=https://tds.gov.tm/{{ $application->file }}&embedded=true">Google Word Aç</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </body>

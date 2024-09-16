@@ -133,6 +133,7 @@ class UserController extends Controller
             $request->validate([
                 'bolum' => 'required',
                 'applications' => 'required|array|min:1|max:5',
+                'applications.*' => 'file|mimes:pdf,doc,docx|max:2048',
                 'button__type' => 'required',
             ]);
 
@@ -469,6 +470,7 @@ class UserController extends Controller
             $request->validate([
                 'bolum' => 'required',
                 'applications' => 'required|array|min:1|max:5',
+                'applications.*' => 'file|mimes:pdf,doc,docx|max:2048',
                 'button__type' => 'required',
             ]);
 
@@ -621,6 +623,7 @@ class UserController extends Controller
             $request->validate([
                 'bolum' => 'required',
                 'applications' => 'required|array|min:1|max:5',
+                'applications.*' => 'file|mimes:pdf,doc,docx|max:2048',
                 'button__type' => 'required',
             ]);
 
@@ -768,6 +771,7 @@ class UserController extends Controller
             $request->validate([
                 'bolum' => 'required',
                 'applications' => 'required|array|min:1|max:5',
+                'applications.*' => 'file|mimes:pdf,doc,docx|max:2048',
                 'button__type' => 'required',
             ]);
 

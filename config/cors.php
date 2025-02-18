@@ -19,7 +19,10 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => [
+        'https://tds.gov.tm',  // Your primary domain
+        'https://e.gov.tm',    // The other domain you want to allow
+    ],
 
     'allowed_origins_patterns' => [],
 

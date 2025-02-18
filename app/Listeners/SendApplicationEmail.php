@@ -38,14 +38,13 @@ class SendApplicationEmail
         
         $parent_section = Section::findOrFail($section->section_id);
 
-        // Mail::to(env('MAIL_USERNAME'))->queue(new ApplicationSended($application, $user, $section, $parent_section, 'Salam size ' . $user->first_name . ' ' . $user->last_name . ' arza ugratdy!'));
-        // Mail::to(env('MAIL_RECEIVER_USERNAME_CORP_TDS_INFO'))->queue(new ApplicationSended($application, $user, $section, $parent_section, 'Salam size ' . $user->first_name . ' ' . $user->last_name . ' arza ugratdy!'));
-        // Mail::to(env('MAIL_ADMIN'))->queue(new ApplicationSended($application, $user, $section, $parent_section, 'Salam size ' . $user->first_name . ' ' . $user->last_name . ' arza ugratdy!'));
         Mail::to($user->email)->queue(new ApplicationSended($application, $user, $section, $parent_section, 'Salam ' . $user->first_name . ' ' . $user->last_name . ' siziň arzaňyz kabul edildi!'));
         
         if($parent_section->name_tm == '«Türkmenstandartlary» baş döwlet gullugy'){
             Mail::to(env('MAIL_RECEIVER_USERNAME_CORP_TDS'))->queue(new ApplicationSended($application, $user, $section, $parent_section, 'Salam size ' . $user->first_name . ' ' . $user->last_name . ' arza ugratdy!'));
+            Mail::to(env('MAIL_RECEIVER_USERNAME_CORP_TSMM'))->queue(new ApplicationSended($application, $user, $section, $parent_section, 'Salam size ' . $user->first_name . ' ' . $user->last_name . ' arza ugratdy!'));
         } else if($parent_section->name_tm == 'Türkmen standart maglumat merkezi') {
+            Mail::to(env('MAIL_RECEIVER_USERNAME_CORP_TDS'))->queue(new ApplicationSended($application, $user, $section, $parent_section, 'Salam size ' . $user->first_name . ' ' . $user->last_name . ' arza ugratdy!'));
             Mail::to(env('MAIL_RECEIVER_USERNAME_CORP_TSMM'))->queue(new ApplicationSended($application, $user, $section, $parent_section, 'Salam size ' . $user->first_name . ' ' . $user->last_name . ' arza ugratdy!'));
         }
     }

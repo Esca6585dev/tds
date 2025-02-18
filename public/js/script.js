@@ -389,13 +389,9 @@ function changeBolum(event) {
 
     var parent_id = event.target.value;
     var api = '/api/sections';
-    var username = 'user@gmail.com';
-    var password = 'password';
 
     $.ajax({  
         url: window.location.origin + api,
-        username : username,
-        password : password,
         data: { parent_id: parent_id },
         type: 'POST',
         contentType: 'application/x-www-form-urlencoded',
@@ -403,9 +399,6 @@ function changeBolum(event) {
         xhrFields: 
         {
             withCredentials: true
-        },
-        beforeSend: function (xhr) { 
-            xhr.setRequestHeader('Authorization', 'Basic ' + btoa(username + ":" + password));             
         },
         success: function (data) {
             const obj = JSON.parse(data);
@@ -432,13 +425,9 @@ function changeDescription(event) {
     
     var id = event.target.value;
     var api = '/api/sections/description';
-    var username = 'user@gmail.com';
-    var password = 'password';
 
     $.ajax({  
         url: window.location.origin + api,
-        username : username,
-        password : password,
         data: { id: id },
         type: 'POST',
         contentType: 'application/x-www-form-urlencoded',
@@ -446,9 +435,6 @@ function changeDescription(event) {
         xhrFields: 
         {
             withCredentials: true
-        },
-        beforeSend: function (xhr) { 
-            xhr.setRequestHeader('Authorization', 'Basic ' + btoa(username + ":" + password));             
         },
         success: function (data) {
             const obj = JSON.parse(data);
@@ -476,13 +462,9 @@ function changeDescriptionRedirectUrl(event) {
     
     var id = event.target.value;
     var api = '/api/sections/url';
-    var username = 'user@gmail.com';
-    var password = 'password';
 
     $.ajax({  
         url: window.location.origin + api,
-        username : username,
-        password : password,
         data: { id: id },
         type: 'POST',
         contentType: 'application/x-www-form-urlencoded',
@@ -490,9 +472,6 @@ function changeDescriptionRedirectUrl(event) {
         xhrFields: 
         {
             withCredentials: true
-        },
-        beforeSend: function (xhr) { 
-            xhr.setRequestHeader('Authorization', 'Basic ' + btoa(username + ":" + password));             
         },
         success: function (data) {
             const obj = JSON.parse(data);
@@ -514,13 +493,9 @@ function redirectToRoute(event) {
     
     var id = event.target.value;
     var api = '/api/sections/url';
-    var username = 'user@gmail.com';
-    var password = 'password';
 
     $.ajax({  
         url: window.location.origin + api,
-        username : username,
-        password : password,
         data: { id: id },
         type: 'POST',
         contentType: 'application/x-www-form-urlencoded',
@@ -528,9 +503,6 @@ function redirectToRoute(event) {
         xhrFields: 
         {
             withCredentials: true
-        },
-        beforeSend: function (xhr) { 
-            xhr.setRequestHeader('Authorization', 'Basic ' + btoa(username + ":" + password));             
         },
         success: function (data) {
             const obj = JSON.parse(data);

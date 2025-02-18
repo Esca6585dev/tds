@@ -46,7 +46,7 @@
         .btn {
             margin-bottom: 10px;
             padding: 5px 15px;
-            border: 1px solid rgb(218, 165, 32, .6);
+            border: 1px solid rgb(218, 165, 32, .5);
             background-color: #fff;
             border-radius: 5px;
             cursor: pointer;
@@ -81,7 +81,7 @@
         }
         
         #t01 th {
-            background-color: rgb(218, 165, 32, .9);
+            background-color: rgb(218, 165, 32, .5);
             color: #000;
         }
 

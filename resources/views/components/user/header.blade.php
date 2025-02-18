@@ -91,8 +91,8 @@
       <div class="header__wrapper__right">
         <div class="symbol">
           <img
-            src="{{ asset('img/tds-logo/dowlet-nyshany-2024.png') }}"
-            alt="{{ asset('img/tds-logo/dowlet-nyshany-2024.png') }}"
+            src="{{ asset('img/tds-logo/dowlet-nyshany.jpg') }}"
+            alt="{{ asset('img/tds-logo/dowlet-nyshany.jpg') }}"
           />
         </div>
       </div>

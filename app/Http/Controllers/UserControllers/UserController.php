@@ -329,9 +329,9 @@ class UserController extends Controller
                 $section->addTextBreak(3);
 
                 $filePath = 'https://tds.gov.tm/' . app()->getlocale() . '/' . 'profile/';
-                $qrCode = QrCode::format('png')->size(75)->generate($filePath . $code_number . '/docx');
+                // $qrCode = QrCode::format('png')->size(75)->generate($filePath . $code_number . '/docx');
 
-                $section->addImage($qrCode);
+                // $section->addImage($qrCode);
 
                 $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
 
@@ -413,9 +413,9 @@ class UserController extends Controller
                 $section->addTextBreak(3);
 
                 $filePath = 'https://tds.gov.tm/' . app()->getlocale() . '/' . 'profile/';
-                $qrCode = QrCode::format('png')->size(75)->generate($filePath . $code_number . '/docx');
+                // $qrCode = QrCode::format('png')->size(75)->generate($filePath . $code_number . '/docx');
 
-                $section->addImage($qrCode);
+                // $section->addImage($qrCode);
 
                 $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
 
@@ -576,9 +576,9 @@ class UserController extends Controller
         $section->addTextBreak(3);
 
         $filePath = 'https://tds.gov.tm/' . app()->getlocale() . '/' . 'profile/';
-        $qrCode = QrCode::format('png')->size(75)->generate($filePath . $code_number . '/docx');
+        // $qrCode = QrCode::format('png')->size(75)->generate($filePath . $code_number . '/docx');
 
-        $section->addImage($qrCode);
+        // $section->addImage($qrCode);
 
         $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
 
@@ -724,9 +724,9 @@ class UserController extends Controller
         $section->addTextBreak(3);
 
         $filePath = 'https://tds.gov.tm/' . app()->getlocale() . '/' . 'profile/';
-        $qrCode = QrCode::format('png')->size(75)->generate($filePath . $code_number . '/docx');
+        // $qrCode = QrCode::format('png')->size(75)->generate($filePath . $code_number . '/docx');
 
-        $section->addImage($qrCode);
+        // $section->addImage($qrCode);
 
         $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
 
@@ -870,9 +870,9 @@ class UserController extends Controller
         $section->addTextBreak(3);
 
         $filePath = 'https://tds.gov.tm/' . app()->getlocale() . '/' . 'profile/';
-        $qrCode = QrCode::format('png')->size(75)->generate($filePath . $code_number . '/docx');
+        // $qrCode = QrCode::format('png')->size(75)->generate($filePath . $code_number . '/docx');
 
-        $section->addImage($qrCode);
+        // $section->addImage($qrCode);
 
         $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
 

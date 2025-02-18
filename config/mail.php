@@ -85,7 +85,7 @@ return [
 
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'name' => mb_encode_mimeheader(env('MAIL_FROM_NAME', 'Your Application Name'), 'UTF-8', 'B'), // Encode!
     ],
 
     /*

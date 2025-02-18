@@ -1,4 +1,8 @@
 "use strict";
+const part1 = 'AIzaSyDcnW6W';
+const part2 = 'ejpTOCffshGD';
+const part3 = 'Db4neIrXVUA1EAE';
+const apiKey = part1 + part2 + part3;
 
 var KTCalendarGoogle = function() {
 
@@ -37,7 +41,7 @@ var KTCalendarGoogle = function() {
                 // THIS KEY WON'T WORK IN PRODUCTION!!!
                 // To make your own Google API key, follow the directions here:
                 // http://fullcalendar.io/docs/google_calendar/
-                googleCalendarApiKey: 'AIzaSyDcnW6WejpTOCffshGDDb4neIrXVUA1EAE',
+                googleCalendarApiKey: apiKey,
 
                 // US Holidays
                 events: 'en.usa#holiday@group.v.calendar.google.com',

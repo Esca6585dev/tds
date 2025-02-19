@@ -1,5 +1,3 @@
-<script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
-
 <style>
     main {
         display: flex;

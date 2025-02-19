@@ -30,6 +30,7 @@ Route::group([
             '/user' => App\Http\Controllers\AdminControllers\User\UserController::class,
             '/cart' => App\Http\Controllers\AdminControllers\Cart\CartController::class,
             '/application' => App\Http\Controllers\AdminControllers\Application\ApplicationController::class,
+            '/magazine' => App\Http\Controllers\AdminControllers\Magazine\MagazineController::class,
         ]);
     });
 });

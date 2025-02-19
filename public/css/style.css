@@ -235,7 +235,7 @@ ul li {
 }
 
 .color__red {
-  font-family: 'Times New Roman';
+  font-family: 'Times New Roman', Georgia, 'Times', serif;
   color: red;
 }
 
@@ -856,7 +856,7 @@ a.button {
 }
 
 .sample__column__top {
-  font-family: 'Times New Roman';
+  font-family: 'Times New Roman', Georgia, 'Times', serif;
   font-weight: bold;
   color: #4989de;
   text-align: center;
@@ -874,7 +874,7 @@ a.button {
 }
 
 .textarea__blanka {
-  font-family: 'Times New Roman';
+  font-family: 'Times New Roman', Georgia, 'Times', serif;
   border: none;
   text-align: center;
   cursor: pointer;
@@ -884,7 +884,7 @@ a.button {
 }
 
 .input__blanka {
-  font-family: 'Times New Roman';
+  font-family: 'Times New Roman', Georgia, 'Times', serif;
   font-size: 9px;
   border: none;
   cursor: pointer;
@@ -893,7 +893,7 @@ a.button {
 }
 
 .section__container__body .section__container__word .textarea__word__head {
-  font-family: 'Times New Roman';
+  font-family: 'Times New Roman', Georgia, 'Times', serif;
   font-size: 16px;
   padding: 10px;
   text-align: center;
@@ -903,7 +903,7 @@ a.button {
 }
 
 .section__container__body .section__container__word .textarea__word__middle {
-  font-family: 'Times New Roman';
+  font-family: 'Times New Roman', Georgia, 'Times', serif;
   font-size: 16px;
   padding: 10px;
   text-align: center;
@@ -913,7 +913,7 @@ a.button {
 }
 
 .section__container__body .section__container__word .textarea__word__body {
-  font-family: 'Times New Roman';
+  font-family: 'Times New Roman', Georgia, 'Times', serif;
   font-size: 16px;
   padding: 10px;
   text-align: justify;
@@ -924,7 +924,7 @@ a.button {
 }
 
 .input__person {
-  font-family: 'Times New Roman';
+  font-family: 'Times New Roman', Georgia, 'Times', serif;
   padding: 5px 10px;
   font-size: 16px;
   border: 1px solid #4989de;
@@ -935,7 +935,7 @@ a.button {
 }
 
 .section__container__body .section__container__word .standart__body__list li {
-  font-family: 'Times New Roman';
+  font-family: 'Times New Roman', Georgia, 'Times', serif;
   font-size: 16px;
   padding: 5px;
 }

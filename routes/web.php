@@ -48,6 +48,8 @@ Route::group([
 
     Route::post('/send/message', [App\Http\Controllers\UserControllers\UserController::class, 'sendMessage'])->name('send-message')->middleware(['auth','verified','require_phone_number']);
 
+    Route::get('/magazine', [App\Http\Controllers\UserControllers\UserController::class, 'magazine'])->name('magazine');
+
     Route::get('/news', [App\Http\Controllers\UserControllers\UserController::class, 'news'])->name('news');
 
     Route::get('/news/{id}-{slug}', [App\Http\Controllers\UserControllers\UserController::class, 'newsID'])->name('news.id');

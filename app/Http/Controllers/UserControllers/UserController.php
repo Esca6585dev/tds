@@ -946,6 +946,15 @@ class UserController extends Controller
         return view('user-panel.news-section', compact('news'));
     }
 
+    public function magazine(Request $request, $lang, $pagination = 25)
+    {
+        if($request->pagination) {
+            $pagination = (int)$request->pagination;
+        }
+
+        return view('user-panel.magazine-section', compact('pagination'));
+}
+
     public function newsID($lang, $id, $slug)
     {
         $new = News::findOrFail($id);
